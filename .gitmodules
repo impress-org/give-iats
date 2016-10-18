@@ -1,0 +1,6 @@
+[submodule "PHP"]
+	path = includes/lib/iATSPayments
+	url = https://github.com/iATSPayments/PHP.git
+[submodule "includes/lib/php-credit-card-validator"]
+	path = includes/lib/php-credit-card-validator
+	url = https://github.com/inacho/php-credit-card-validator.git
