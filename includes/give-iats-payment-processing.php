@@ -44,7 +44,6 @@ function give_process_iats_payment( $donation_data ) {
 
 	// Verify successful call
 	if ( 'OK' != substr( trim( $response['AUTHORIZATIONRESULT'] ), 0, 2 ) ) {
-		give_set_error( 'payment_error', __( 'There was an error processing your payment (iATS\'s API is down), please try again', 'give-iatspayments' ) );
 		give_record_gateway_error( __( ' Error', 'give-iatspayments' ), sprintf( __( 'There was an error processing your payment (iATS\'s API was down). Error: %s', 'give-iatspayments' ), json_encode( $response ) ), 0 );
 
 		// Redirect to donation form.
