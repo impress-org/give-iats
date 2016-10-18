@@ -90,15 +90,16 @@ class Give_iATS_Notices {
 	 * Setup hooks.
 	 */
 	public function setup_hook() {
-		add_action( 'give_pre_form_output', array( $this, 'show_notices' ) );
+		add_action( 'give_pre_form_output', array( $this, 'show_frontend_notices' ) );
+		add_action( 'admin_notices', array( $this, 'show_admin_notices' ) );
 	}
 
 	/**
-	 * Set error message if any.
+	 * Set frontend error message if any.
 	 *
 	 * @param string $form_id Form ID.
 	 */
-	public function show_notices( $form_id ) {
+	public function show_frontend_notices( $form_id ) {
 		// Bailout.
 		if ( ! isset( $_GET['give-iats-message'] ) || ( $form_id != $_GET['form-id'] ) ) {
 			return;
@@ -111,6 +112,29 @@ class Give_iATS_Notices {
 
 			// Show error.
 			give_output_error( $error_message );
+		}
+	}
+
+	/**
+	 * Set admin error message if any.
+	 *
+	 * @param string $form_id Form ID.
+	 */
+	public function show_admin_notices( $form_id ) {
+		// Bailout.
+		if ( ! is_admin() ) {
+			return;
+		}
+
+		// Error code
+		$error_code = sanitize_text_field( $_GET['give-iats-message'] );
+
+		if ( $error_message = $this->get_reject_code( $error_code ) ) {
+			?>
+			<div class="notice notice-success is-dismissible">
+				<p><strong><?php _e( 'iATS donation refund error: ', 'give-iatspayments' ); ?></strong><?php echo $error_message; ?></p>
+			</div>
+			<?php
 		}
 	}
 }
