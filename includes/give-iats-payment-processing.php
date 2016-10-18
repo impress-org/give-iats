@@ -133,16 +133,23 @@ add_action( 'give_checkout_error_checks', 'give_iats_varify_donation_data', 9999
 
 
 /**
- * Process refund
+ * Process refund.
  *
  * @since 1.0
  *
- * @param Give_Payment $donation
+ * @param bool   $do_change
+ * @param int    $donation_id
+ * @param string $new_status
+ * @param string $old_status
+ *
+ * @return bool
  */
-function give_iats_donation_refund( $donation ) {
+function give_iats_donation_refund( $do_change, $donation_id, $new_status, $old_status ) {
+	$donation = new Give_Payment( $donation_id );
+
 	// Bailout.
-	if ( 'iatspayments' !== $donation->gateway ) {
-		return;
+	if ( 'refunded' !== $new_status || 'iatspayments' !== $donation->gateway ) {
+		return $do_change;
 	}
 
 	// Get agent credentials.
@@ -183,9 +190,11 @@ function give_iats_donation_refund( $donation ) {
 
 	// Add refund transaction id.
 	give_update_payment_meta( $donation->ID, '_give_payment_refund_id', $response['TRANSACTIONID'] );
+
+	return true;
 }
 
-add_action( 'give_pre_refund_payment', 'give_iats_donation_refund' );
+add_filter( 'give_should_update_payment_status', 'give_iats_donation_refund', 10, 4 );
 
 
 /**
