@@ -71,7 +71,7 @@ function give_iats_get_server_name() {
 	$server   = '';
 
 	if ( in_array( $currency, array( 'USD', 'CAD' ) ) ) {
-		$server = 'UK';
+		$server = 'NA';
 	} elseif ( in_array( $currency, array( 'GBP', 'EUR' ) ) ) {
 		$server = 'UK';
 	}
