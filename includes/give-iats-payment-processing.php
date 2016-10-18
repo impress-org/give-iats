@@ -19,7 +19,7 @@ function give_process_iats_payment( $donation_data ) {
 	$password  = give_get_option( 'iats_agent_password' );  // Assigned by iATS
 
 	// Process link.
-	$iATS_PL = new iATS\ProcessLink( $agentCode, $password );
+	$iATS_PL = new iATS\ProcessLink( $agentCode, $password, give_iats_get_server_name() );
 
 	$request = array(
 		'invoiceNum'       => '000001',
@@ -150,7 +150,7 @@ function give_iats_donation_refund( $donation ) {
 	$password  = give_get_option( 'iats_agent_password' );  // Assigned by iATS
 
 	// Process link.
-	$iATS_PL = new iATS\ProcessLink( $agentCode, $password );
+	$iATS_PL = new iATS\ProcessLink( $agentCode, $password, give_iats_get_server_name() );
 
 	$request = array(
 		'transactionId' => give_get_payment_transaction_id( $donation->ID ),
