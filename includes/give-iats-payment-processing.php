@@ -1,4 +1,11 @@
 <?php
+/**
+ * Progress donation by iATS payment gateway
+ *
+ * @since 1.0
+ *
+ * @param $donation_data
+ */
 function give_process_iats_payment( $donation_data ) {
 	if ( ! wp_verify_nonce( $donation_data['gateway_nonce'], 'give-gateway' ) ) {
 		wp_die( esc_html__( 'Nonce verification has failed.', 'give-iatspayments' ), esc_html__( 'Error', 'give' ), array( 'response' => 403 ) );
@@ -103,6 +110,8 @@ add_action( 'give_gateway_iatspayments', 'give_process_iats_payment' );
 /**
  * Validate donation data for iATS payment gateways.
  *
+ * @since 1.0
+ *
  * @param $donation_data
  */
 function give_iats_varify_donation_data( $donation_data ) {
@@ -125,6 +134,8 @@ add_action( 'give_checkout_error_checks', 'give_iats_varify_donation_data', 9999
 
 /**
  * Process refund
+ *
+ * @since 1.0
  *
  * @param Give_Payment $donation
  */
@@ -179,6 +190,8 @@ add_action( 'give_pre_refund_payment', 'give_iats_donation_refund' );
 
 /**
  * Show refund id.
+ *
+ * @since 1.0
  *
  * @param $donation_id
  */

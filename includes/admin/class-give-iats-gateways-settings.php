@@ -2,6 +2,8 @@
 
 /**
  * Class Give_iATS_Gateway_Settings
+ *
+ * @since 1.0
  */
 class Give_iATS_Gateway_Settings {
 	/**
@@ -51,7 +53,7 @@ class Give_iATS_Gateway_Settings {
 		// Add payment gateway to payment gateways list.
 		add_filter( 'give_donation_gateways', array( $this, 'add_gateways' ) );
 
-		if( is_admin() ) {
+		if ( is_admin() ) {
 
 			// Add section to payment gateways tab.
 			add_filter( 'give_get_sections_gateways', array( $this, 'add_section' ) );
@@ -113,10 +115,10 @@ class Give_iATS_Gateway_Settings {
 					'desc'  => __( 'Required agent code provided by iATS.', 'give-iatspayments' ),
 				),
 				array(
-					'title' => __('Agent Password', 'give-iatspayments'),
+					'title' => __( 'Agent Password', 'give-iatspayments' ),
 					'id'    => 'iats_agent_password',
-					'type' => 'password',
-					'desc' => esc_html__('Required password provided by iATS.', 'give-iatspayments'),
+					'type'  => 'password',
+					'desc'  => esc_html__( 'Required password provided by iATS.', 'give-iatspayments' ),
 				),
 				array(
 					'id'   => 'give_iats_payments_setting',

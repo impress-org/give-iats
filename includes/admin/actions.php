@@ -6,6 +6,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /**
  * Check if iATS dependency enable or not.
+ *
+ * @since 1.0
  */
 function give_iats_check_dependancies() {
 	// Bailout

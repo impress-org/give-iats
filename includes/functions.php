@@ -1,6 +1,8 @@
 <?php
 /**
  * Check if iATS payment gateway active or not.
+ *
+ * @since 1.0
  * @return bool
  */
 function give_is_iats_active() {
@@ -22,6 +24,8 @@ function give_is_iats_active() {
  * Get card name by card type
  *
  * Note: Only Limit credit card type supported by iATS payment gateway.
+ *
+ * @since 1.0
  *
  * @param string $card_type Credit card type.
  *

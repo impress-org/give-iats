@@ -2,6 +2,8 @@
 
 /**
  * Class Give_iATS_Notices
+ *
+ * @since 1.0
  */
 class Give_iATS_Notices {
 	static private $instance;
@@ -132,7 +134,9 @@ class Give_iATS_Notices {
 		if ( $error_message = $this->get_reject_code( $error_code ) ) {
 			?>
 			<div class="notice notice-success is-dismissible">
-				<p><strong><?php _e( 'iATS donation refund error: ', 'give-iatspayments' ); ?></strong><?php echo $error_message; ?></p>
+				<p>
+					<strong><?php _e( 'iATS donation refund error: ', 'give-iatspayments' ); ?></strong><?php echo $error_message; ?>
+				</p>
 			</div>
 			<?php
 		}
