@@ -49,11 +49,18 @@ function give_iats_get_card_name_by_type( $card_type ) {
 			break;
 
 		case 'discover':
-			$card_name = 'DSC';
+			// DSC only supported for USD currency.
+			if ( 'USD' === give_get_currency() ) {
+				$card_name = 'DSC';
+			}
+
 			break;
 
 		case 'maestro':
-			$card_name = 'MAESTRO';
+			// MAESTRO only supported for GBP currency.
+			if ( 'GBP' === give_get_currency() ) {
+				$card_name = 'MAESTRO';
+			}
 			break;
 	}
 
