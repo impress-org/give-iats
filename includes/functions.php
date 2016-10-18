@@ -59,3 +59,22 @@ function give_iats_get_card_name_by_type( $card_type ) {
 
 	return $card_name;
 }
+
+
+/**
+ * Get iATS paymetn gateways server.
+ *
+ * @return string $server Server name.
+ */
+function give_iats_get_server_name() {
+	$currency = give_get_currency();
+	$server   = '';
+
+	if ( in_array( $currency, array( 'USD', 'CAD' ) ) ) {
+		$server = 'UK';
+	} elseif ( in_array( $currency, array( 'GBP', 'EUR' ) ) ) {
+		$server = 'UK';
+	}
+
+	return $server;
+}
