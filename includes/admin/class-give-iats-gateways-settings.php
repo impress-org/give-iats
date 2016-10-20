@@ -60,6 +60,9 @@ class Give_iATS_Gateway_Settings {
 
 			// Add section settings.
 			add_filter( 'give_get_settings_gateways', array( $this, 'add_settings' ) );
+
+			// Add setting to donation edit screen.
+			add_action( 'give_view_order_details_before', array( $this, 'give_iats_admin_payment_js' ), 100 );
 		}
 	}
 
@@ -160,6 +163,36 @@ class Give_iATS_Gateway_Settings {
 		}
 
 		return $settings;
+	}
+
+	/**
+	 * Load Transaction-specific admin javascript
+	 *
+	 * @param int $payment_id
+	 */
+	function give_iats_admin_payment_js( $payment_id = 0 ) {
+		// Bailout.
+		if ( 'iatspayments' !== give_get_payment_gateway( $payment_id ) ) {
+			return;
+		}
+		?>
+		<script type="text/javascript">
+			jQuery(document).ready(function ($) {
+				$('select[name=give-payment-status]').change(function () {
+
+					if ('refunded' == $(this).val() ) {
+						$(this)
+							.closest('div')
+							.append('<p id="give-iats-refund"><input type="checkbox" id="give_refund_in_iats" name="give_refund_in_iats" value="1"/><label for="give_refund_in_iats"><?php _e( 'Refund Charge in iATS?', 'give-iatspayments' ); ?></label></p>');
+					} else {
+						$('#give-iats-refund').remove();
+					}
+
+				});
+			});
+		</script>
+		<?php
+
 	}
 }
 
