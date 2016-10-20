@@ -73,7 +73,7 @@ class Give_iATS_Gateway_Settings {
 	public function add_gateways( $gateways ) {
 		$gateways[ $this->section_id ] = array(
 			'admin_label'    => $this->section_label,
-			'checkout_label' => esc_html__( 'iATS', 'give-iatspayments' ),
+			'checkout_label' => give_iats_get_payment_method_label(),
 		);
 
 		return $gateways;
