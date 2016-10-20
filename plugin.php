@@ -43,7 +43,7 @@
 /**
  * Class Give_iATS_Gateway
  */
-class Give_iATS_Gateway{
+class Give_iATS_Gateway {
 	function __construct() {
 		// iATS payment gateways core.
 		require_once 'includes/lib/iATSPayments/iATS.php';
@@ -63,9 +63,23 @@ class Give_iATS_Gateway{
 		// Process payments.
 		require_once 'includes/give-iats-payment-processing.php';
 
-		if( is_admin() ) {
+		if ( is_admin() ) {
 			// Add actions.
 			require_once 'includes/admin/actions.php';
+		}
+
+		// Load scripts and style.
+		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
+	}
+
+	/**
+	 * Enqueue scripts.
+	 *
+	 * @param $hook
+	 */
+	function enqueue_scripts( $hook ) {
+		if( 'gateways' === give_get_current_setting_tab() && 'iatspayments' === give_get_current_setting_section() ) {
+			wp_enqueue_script( 'iats-admin-settings', plugins_url( '/assets/js/admin/admin-settings.js', __FILE__), array('jquery') );
 		}
 	}
 }
