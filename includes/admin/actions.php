@@ -27,7 +27,12 @@ function give_iats_check_dependancies() {
 		// Show notice.
 		add_filter( 'give-settings_update_notices', 'give_iats_disable_by_currency' );
 
-	} elseif ( empty( $give_settings['iats_agent_code'] ) || empty( $give_settings['iats_agent_password'] ) ) {
+	} elseif ( ! give_iats_is_sandbox_mode_enabled() && ( empty( $give_settings['iats_live_agent_code'] ) || empty( $give_settings['iats_live_agent_password'] ) ) ) {
+		$reset_settings = true;
+
+		// Show notice.
+		add_filter( 'give-settings_update_notices', 'give_iats_disable_by_agent_credentials' );
+	} elseif ( give_iats_is_sandbox_mode_enabled() && ( empty( $give_settings['iats_sandbox_agent_code'] ) || empty( $give_settings['iats_sandbox_agent_password'] ) ) ) {
 		$reset_settings = true;
 
 		// Show notice.
