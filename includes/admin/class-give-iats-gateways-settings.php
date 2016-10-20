@@ -124,7 +124,7 @@ class Give_iATS_Gateway_Settings {
 					'id'      => 'iats_payment_method_label',
 					'type'    => 'text',
 					'default' => esc_html__( 'Credit Card', 'give-iatspayments' ),
-					'desc'    => __( 'Payment method label will be appear on frontend', 'give-iatspayments' ),
+					'desc'    => __( 'Payment method label will be appear on frontend.', 'give-iatspayments' ),
 				),
 				array(
 					'title'   => esc_html__( 'Sandbox Agent Code', 'give-iatspayments' ),
