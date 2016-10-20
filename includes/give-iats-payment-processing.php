@@ -15,8 +15,9 @@ function give_process_iats_payment( $donation_data ) {
 	$card = Inacho\CreditCard::validCreditCard( $donation_data['post_data']['card_number'] );
 
 	// Get agent credentials.
-	$agentCode = give_get_option( 'iats_agent_code' );      // Assigned by iATS
-	$password  = give_get_option( 'iats_agent_password' );  // Assigned by iATS
+	$agent_credential = give_iats_get_agent_credentials();
+	$agentCode        = $agent_credential['code'];            // Assigned by iATS
+	$password         = $agent_credential['password'];        // Assigned by iATS
 
 	// Process link.
 	$iATS_PL = new iATS\ProcessLink( $agentCode, $password, give_iats_get_server_name() );
@@ -145,15 +146,16 @@ add_action( 'give_checkout_error_checks', 'give_iats_varify_donation_data', 9999
  */
 function give_iats_donation_refund( $do_change, $donation_id, $new_status, $old_status ) {
 	$donation = new Give_Payment( $donation_id );
-
+	
 	// Bailout.
-	if ( 'refunded' !== $new_status || 'iatspayments' !== $donation->gateway ) {
+	if ( 'refunded' !== $new_status || 'iatspayments' !== $donation->gateway || empty( $_POST['give_refund_in_iats'] ) ) {
 		return $do_change;
 	}
 
 	// Get agent credentials.
-	$agentCode = give_get_option( 'iats_agent_code' );      // Assigned by iATS
-	$password  = give_get_option( 'iats_agent_password' );  // Assigned by iATS
+	$agent_credential = give_iats_get_agent_credentials();
+	$agentCode        = $agent_credential['code'];            // Assigned by iATS
+	$password         = $agent_credential['password'];        // Assigned by iATS
 
 	// Process link.
 	$iATS_PL = new iATS\ProcessLink( $agentCode, $password, give_iats_get_server_name() );
