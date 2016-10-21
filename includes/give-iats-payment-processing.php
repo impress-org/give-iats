@@ -23,7 +23,6 @@ function give_process_iats_payment( $donation_data ) {
 	$iATS_PL = new iATS\ProcessLink( $agentCode, $password, give_iats_get_server_name() );
 
 	$request = array(
-		'invoiceNum'       => '000001',
 		'creditCardNum'    => $donation_data['post_data']['card_number'],
 		'creditCardExpiry' => $donation_data['post_data']['card_expiry'],
 		'cvv2'             => $donation_data['post_data']['card_cvc'],
