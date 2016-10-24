@@ -124,7 +124,7 @@ class Give_iATS_Notices {
 	 */
 	public function show_admin_notices( $form_id ) {
 		// Bailout.
-		if ( ! is_admin() ) {
+		if ( ! is_admin() || ! isset( $_GET['give-iats-message'] ) ) {
 			return;
 		}
 
