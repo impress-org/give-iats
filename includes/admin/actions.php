@@ -41,7 +41,7 @@ function give_iats_check_dependancies() {
 			} elseif (
 				isset( $_POST['iats_sandbox_testing'] )
 				&& ( empty( $_POST['iats_sandbox_agent_code'] ) || empty( $_POST['iats_sandbox_agent_password'] ) )
-			){
+			) {
 				$reset_settings = true;
 				give_iats_disable_by_agent_credentials();
 			}
@@ -51,7 +51,7 @@ function give_iats_check_dependancies() {
 	if ( ! $reset_settings ) {
 		return;
 	}
-	
+
 	// Deactivate iats payment gateways: It has some currency dependency.
 	unset( $_POST['gateways']['iatspayments'] );
 }
