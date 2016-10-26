@@ -142,7 +142,7 @@ final class Give_iATS_Gateway {
 	 * @param $hook
 	 */
 	public function enqueue_scripts( $hook ) {
-		if ( 'gateways' === give_get_current_setting_tab() && 'iatspayments' === give_get_current_setting_section() ) {
+		if ( isset( $_GET['tab'] ) && 'gateways' === $_GET['tab'] ) {
 			wp_enqueue_script( 'iats-admin-settings', plugins_url( '/assets/js/admin/admin-settings.js', __FILE__ ), array( 'jquery' ) );
 		}
 	}
