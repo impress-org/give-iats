@@ -53,17 +53,8 @@ class Give_iATS_Gateway_Settings {
 		// Add payment gateway to payment gateways list.
 		add_filter( 'give_donation_gateways', array( $this, 'add_gateways' ) );
 
-		if ( is_admin() ) {
-
-			// Add section to payment gateways tab.
-			add_filter( 'give_get_sections_gateways', array( $this, 'add_section' ) );
-
-			// Add section settings.
-			add_filter( 'give_get_settings_gateways', array( $this, 'add_settings' ) );
-
-			// Add setting to donation edit screen.
-			add_action( 'give_view_order_details_before', array( $this, 'give_iats_admin_payment_js' ), 100 );
-		}
+		// Add settings.
+		add_filter( 'give_settings_gateways', array( $this, 'add_settings' ), 99999 );
 	}
 
 	/**
@@ -103,66 +94,56 @@ class Give_iATS_Gateway_Settings {
 	 * @return array
 	 */
 	public function add_settings( $settings ) {
-		$current_section = give_get_current_setting_section();
+		$iats_settings = array(
+			array(
+				'name' => __( 'iATS Settings', 'give-iatspayments' ),
+				'desc' => '<hr>',
+				'id'   => 'give_iats_title',
+				'type' => 'give_title'
+			),
+			array(
+				'name'   => esc_html__( 'Sandbox Testing', 'give-iatspayments' ),
+				'id'      => 'iats_sandbox_testing',
+				'type'    => 'checkbox',
+				'desc'    => '',
+				'default' => '1'
+			),
+			array(
+				'name'   => esc_html__( 'Payment method label', 'give-iatspayments' ),
+				'id'      => 'iats_payment_method_label',
+				'type'    => 'text',
+				'default' => esc_html__( 'Credit Card', 'give-iatspayments' ),
+				'desc'    => __( 'Payment method label will be appear on frontend.', 'give-iatspayments' ),
+			),
+			array(
+				'name'   => esc_html__( 'Sandbox Agent Code', 'give-iatspayments' ),
+				'id'      => 'iats_sandbox_agent_code',
+				'type'    => 'text',
+				'default' => 'TEST88',
+				'desc'    => __( 'Required agent code provided by iATS.', 'give-iatspayments' ),
+			),
+			array(
+				'name'   => __( 'Sandbox Agent Password', 'give-iatspayments' ),
+				'id'      => 'iats_sandbox_agent_password',
+				'type'    => 'text',
+				'default' => 'TEST88',
+				'desc'    => esc_html__( 'Required password provided by iATS.', 'give-iatspayments' ),
+			),
+			array(
+				'name' => esc_html__( 'Live Agent Code', 'give-iatspayments' ),
+				'id'    => 'iats_live_agent_code',
+				'type'  => 'text',
+				'desc'  => __( 'Required agent code provided by iATS.', 'give-iatspayments' ),
+			),
+			array(
+				'name' => __( 'Live Agent Password', 'give-iatspayments' ),
+				'id'    => 'iats_live_agent_password',
+				'type'  => 'text',
+				'desc'  => esc_html__( 'Required password provided by iATS.', 'give-iatspayments' ),
+			)
+		);
 
-		if ( $this->section_id == $current_section ) {
-			$settings = array(
-				array(
-					'id'   => 'give_iats_payments_setting',
-					'type' => 'title',
-				),
-				array(
-					'title'   => esc_html__( 'Sandbox Testing', 'give-iatspayments' ),
-					'id'      => 'iats_sandbox_testing',
-					'type'    => 'radio_inline',
-					'desc'    => '',
-					'default' => 'enabled',
-					'options' => array(
-						'enabled'  => esc_html__( 'Enabled', 'give-iatspayments' ),
-						'disabled' => esc_html__( 'Disabled', 'give-iatspayments' ),
-					),
-				),
-				array(
-					'title'   => esc_html__( 'Payment method label', 'give-iatspayments' ),
-					'id'      => 'iats_payment_method_label',
-					'type'    => 'text',
-					'default' => esc_html__( 'Credit Card', 'give-iatspayments' ),
-					'desc'    => __( 'Payment method label will be appear on frontend.', 'give-iatspayments' ),
-				),
-				array(
-					'title'   => esc_html__( 'Sandbox Agent Code', 'give-iatspayments' ),
-					'id'      => 'iats_sandbox_agent_code',
-					'type'    => 'text',
-					'default' => 'TEST88',
-					'desc'    => __( 'Required agent code provided by iATS.', 'give-iatspayments' ),
-				),
-				array(
-					'title'   => __( 'Sandbox Agent Password', 'give-iatspayments' ),
-					'id'      => 'iats_sandbox_agent_password',
-					'type'    => 'password',
-					'default' => 'TEST88',
-					'desc'    => esc_html__( 'Required password provided by iATS.', 'give-iatspayments' ),
-				),
-				array(
-					'title' => esc_html__( 'Live Agent Code', 'give-iatspayments' ),
-					'id'    => 'iats_live_agent_code',
-					'type'  => 'text',
-					'desc'  => __( 'Required agent code provided by iATS.', 'give-iatspayments' ),
-				),
-				array(
-					'title' => __( 'Live Agent Password', 'give-iatspayments' ),
-					'id'    => 'iats_live_agent_password',
-					'type'  => 'password',
-					'desc'  => esc_html__( 'Required password provided by iATS.', 'give-iatspayments' ),
-				),
-				array(
-					'id'   => 'give_iats_payments_setting',
-					'type' => 'sectionend',
-				),
-			);
-		}
-
-		return $settings;
+		return array_merge( $settings, $iats_settings );
 	}
 
 	/**
