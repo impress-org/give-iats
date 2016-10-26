@@ -51,7 +51,7 @@ class Give_iATS_Gateway_Settings {
 		$this->section_label = __( 'iATS Payments', 'give-iatspayments' );
 
 		// Add payment gateway to payment gateways list.
-		add_filter( 'give_donation_gateways', array( $this, 'add_gateways' ) );
+		add_filter( 'give_payment_gateways', array( $this, 'add_gateways' ) );
 
 		// Add settings.
 		add_filter( 'give_settings_gateways', array( $this, 'add_settings' ), 99999 );
@@ -106,7 +106,6 @@ class Give_iATS_Gateway_Settings {
 				'id'      => 'iats_sandbox_testing',
 				'type'    => 'checkbox',
 				'desc'    => '',
-				'default' => '1'
 			),
 			array(
 				'name'   => esc_html__( 'Payment method label', 'give-iatspayments' ),
@@ -119,14 +118,12 @@ class Give_iATS_Gateway_Settings {
 				'name'   => esc_html__( 'Sandbox Agent Code', 'give-iatspayments' ),
 				'id'      => 'iats_sandbox_agent_code',
 				'type'    => 'text',
-				'default' => 'TEST88',
 				'desc'    => __( 'Required agent code provided by iATS.', 'give-iatspayments' ),
 			),
 			array(
 				'name'   => __( 'Sandbox Agent Password', 'give-iatspayments' ),
 				'id'      => 'iats_sandbox_agent_password',
 				'type'    => 'text',
-				'default' => 'TEST88',
 				'desc'    => esc_html__( 'Required password provided by iATS.', 'give-iatspayments' ),
 			),
 			array(
