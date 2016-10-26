@@ -1,20 +1,21 @@
 jQuery(document).ready(function ($) {
+	console.log('js loaded');
 	// Show/Hide fields.
-	var sandbox_radio_btns = $('input[name="iats_sandbox_testing"]:radio');
+	var sandbox_setting_field = $('#iats_sandbox_testing');
 
-	sandbox_radio_btns.on('change', function () {
-		var field_value = $('input[name="iats_sandbox_testing"]:radio:checked').val();
+	sandbox_setting_field.on('change', function () {
+		console.log('event performing');
+		if (sandbox_setting_field.is(':checked')) {
+			$('#iats_live_agent_code').closest('.cmb-row').hide();
+			$('#iats_live_agent_password').closest('.cmb-row').hide();
+			$('#iats_sandbox_agent_code').closest('.cmb-row').show();
+			$('#iats_sandbox_agent_password').closest('.cmb-row').show();
 
-		if ('enabled' == field_value) {
-			$('#iats_live_agent_code').closest('tr').hide();
-			$('#iats_live_agent_password').closest('tr').hide();
-			$('#iats_sandbox_agent_code').closest('tr').show();
-			$('#iats_sandbox_agent_password').closest('tr').show();
 		} else {
-			$('#iats_live_agent_code').closest('tr').show();
-			$('#iats_live_agent_password').closest('tr').show();
-			$('#iats_sandbox_agent_code').closest('tr').hide();
-			$('#iats_sandbox_agent_password').closest('tr').hide();
+			$('#iats_live_agent_code').closest('.cmb-row').show();
+			$('#iats_live_agent_password').closest('.cmb-row').show();
+			$('#iats_sandbox_agent_code').closest('.cmb-row').hide();
+			$('#iats_sandbox_agent_password').closest('.cmb-row').hide();
 		}
 	}).change();
 });
