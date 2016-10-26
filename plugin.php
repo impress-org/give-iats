@@ -123,6 +123,10 @@ final class Give_iATS_Gateway {
 	 * @return Give_iATS_Gateway
 	 */
 	function setup_hooks() {
+		// Admin only scripts.
+		if( ! is_admin() ) {
+			return self::$instance;
+		}
 		// Load scripts and style.
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
 
