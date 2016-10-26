@@ -11,47 +11,52 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 function give_iats_check_dependancies() {
 	// Bailout
-	if ( ! give_is_iats_active() ) {
+	if ( ! isset( $_POST['give_settings_saved'] ) ) {
 		return;
 	}
 
-	// Get core settings.
-	$give_settings  = give_get_settings();
 	$reset_settings = false;
 
+	switch ( $_GET['tab'] ) {
+		case 'general':
+			// Check dependencies.
+			if ( ! in_array( $_POST['currency'], array( 'USD', 'CAD', 'GBA', 'EUR' ) ) ) {
+				$reset_settings = true;
 
-	// Check dependencies.
-	if ( ! in_array( $give_settings['currency'], array( 'USD', 'CAD', 'GBA', 'EUR' ) ) ) {
-		$reset_settings = true;
+				// Show notice.
+				give_iats_disable_by_currency();
 
-		// Show notice.
-		add_filter( 'give-settings_update_notices', 'give_iats_disable_by_currency' );
+			}
+			break;
 
-	} elseif ( ! give_iats_is_sandbox_mode_enabled() && ( empty( $give_settings['iats_live_agent_code'] ) || empty( $give_settings['iats_live_agent_password'] ) ) ) {
-		$reset_settings = true;
+		case 'gateways':
+			// Check dependencies.
+			if (
+				! isset( $_POST['iats_sandbox_testing'] )
+				&& ( empty( $_POST['iats_live_agent_code'] ) || empty( $_POST['iats_live_agent_password'] ) )
+			) {
+				$reset_settings = true;
+				give_iats_disable_by_agent_credentials();
 
-		// Show notice.
-		add_filter( 'give-settings_update_notices', 'give_iats_disable_by_agent_credentials' );
-	} elseif ( give_iats_is_sandbox_mode_enabled() && ( empty( $give_settings['iats_sandbox_agent_code'] ) || empty( $give_settings['iats_sandbox_agent_password'] ) ) ) {
-		$reset_settings = true;
-
-		// Show notice.
-		add_filter( 'give-settings_update_notices', 'give_iats_disable_by_agent_credentials' );
+			} elseif (
+				isset( $_POST['iats_sandbox_testing'] )
+				&& ( empty( $_POST['iats_sandbox_agent_code'] ) || empty( $_POST['iats_sandbox_agent_password'] ) )
+			){
+				$reset_settings = true;
+				give_iats_disable_by_agent_credentials();
+			}
 	}
 
 	// Bailout.
 	if ( ! $reset_settings ) {
 		return;
 	}
-
+	
 	// Deactivate iats payment gateways: It has some currency dependency.
-	unset( $give_settings['gateways']['iatspayments'] );
-
-	// Update settings.
-	update_option( 'give_settings', $give_settings );
+	unset( $_POST['gateways']['iatspayments'] );
 }
 
-add_action( 'give-settings_saved', 'give_iats_check_dependancies' );
+add_action( 'admin_notices', 'give_iats_check_dependancies' );
 
 
 /**
@@ -61,10 +66,14 @@ add_action( 'give-settings_saved', 'give_iats_check_dependancies' );
  *
  * @return mixed
  */
-function give_iats_disable_by_currency( $messages ) {
-	$messages['iats-disable'] = esc_html__( 'iATS payment gateway disabled automatically because you do not have required currency ( USD, CAD, GBA, EUR ).', 'give-iatspayments' );
-
-	return $messages;
+function give_iats_disable_by_currency() {
+	?>
+	<div class="notice notice-error is-dismissible">
+		<p>
+			<?php echo esc_html__( 'iATS payment gateway disabled automatically because you do not have required currency ( USD, CAD, GBA, EUR ).', 'give-iatspayments' ); ?>
+		</p>
+	</div>
+	<?php
 }
 
 /**
@@ -74,8 +83,12 @@ function give_iats_disable_by_currency( $messages ) {
  *
  * @return mixed
  */
-function give_iats_disable_by_agent_credentials( $messages ) {
-	$messages['iats-disable'] = sprintf( __( 'iATS payment gateway disabled automatically because <a href="%s">agent credentials</a> is not correct.', 'give-iatspayments' ), admin_url( 'edit.php?post_type=give_forms&page=give-settings&tab=gateways&section=iatspayments' ) );
-
-	return $messages;
+function give_iats_disable_by_agent_credentials() {
+	?>
+	<div class="notice notice-error is-dismissible">
+		<p>
+			<?php echo __( 'iATS payment gateway disabled automatically because agent credentials is not correct.', 'give-iatspayments' ); ?>
+		</p>
+	</div>
+	<?php
 }
