@@ -107,7 +107,7 @@ function give_iats_get_payment_method_label() {
 function give_iats_is_sandbox_mode_enabled() {
 	$give_settings = give_get_settings();
 
-	return give_is_setting_enabled( $give_settings['iats_sandbox_testing'] );
+	return ( isset( $give_settings['iats_sandbox_testing'] ) && 'on' === $give_settings['iats_sandbox_testing'] );
 }
 
 
