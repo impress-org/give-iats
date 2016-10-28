@@ -105,12 +105,6 @@ class Give_iATS_Gateway_Settings {
 				'type' => 'give_title'
 			),
 			array(
-				'name'   => esc_html__( 'Sandbox Testing', 'give-iatspayments' ),
-				'id'      => 'iats_sandbox_testing',
-				'type'    => 'checkbox',
-				'desc'    => '',
-			),
-			array(
 				'name'   => esc_html__( 'Payment method label', 'give-iatspayments' ),
 				'id'      => 'iats_payment_method_label',
 				'type'    => 'text',

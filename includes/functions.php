@@ -100,18 +100,6 @@ function give_iats_get_payment_method_label() {
 
 
 /**
- * Check if sandbox mode is enabled or disabled.
- *
- * @return bool
- */
-function give_iats_is_sandbox_mode_enabled() {
-	$give_settings = give_get_settings();
-
-	return ( isset( $give_settings['iats_sandbox_testing'] ) && 'on' === $give_settings['iats_sandbox_testing'] );
-}
-
-
-/**
  * Get iats agent credentials.
  *
  * @return array
@@ -123,7 +111,7 @@ function give_iats_get_agent_credentials() {
 		'password' => $give_settings['iats_sandbox_agent_password'],
 	);
 
-	if ( ! give_iats_is_sandbox_mode_enabled() ) {
+	if ( ! give_is_test_mode() ) {
 		$credentials = array(
 			'code'     => $give_settings['iats_live_agent_code'],
 			'password' => $give_settings['iats_live_agent_password'],

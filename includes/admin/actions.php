@@ -7,6 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Check if iATS dependency enable or not.
  *
+ * TODO  : This code will deprecate in 1.8, so update it then.
  * @since 1.0
  */
 function give_iats_check_dependancies() {
@@ -17,7 +18,7 @@ function give_iats_check_dependancies() {
 
 	$reset_settings = false;
 
-	switch ( $_GET['tab'] ) {
+	switch ( esc_attr( $_GET['tab'] ) ) {
 		case 'general':
 			// Check dependencies.
 			if ( ! in_array( $_POST['currency'], array( 'USD', 'CAD', 'GBA', 'EUR' ) ) ) {
@@ -32,14 +33,14 @@ function give_iats_check_dependancies() {
 		case 'gateways':
 			// Check dependencies.
 			if (
-				! isset( $_POST['iats_sandbox_testing'] )
+				! isset( $_POST['test_mode'] )
 				&& ( empty( $_POST['iats_live_agent_code'] ) || empty( $_POST['iats_live_agent_password'] ) )
 			) {
 				$reset_settings = true;
 				give_iats_disable_by_agent_credentials();
 
 			} elseif (
-				isset( $_POST['iats_sandbox_testing'] )
+				isset( $_POST['test_mode'] )
 				&& ( empty( $_POST['iats_sandbox_agent_code'] ) || empty( $_POST['iats_sandbox_agent_password'] ) )
 			) {
 				$reset_settings = true;
@@ -51,7 +52,7 @@ function give_iats_check_dependancies() {
 	if ( ! $reset_settings ) {
 		return;
 	}
-
+	
 	// Deactivate iats payment gateways: It has some currency dependency.
 	unset( $_POST['gateways']['iatspayments'] );
 }
