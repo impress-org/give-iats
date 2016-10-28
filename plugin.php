@@ -152,8 +152,7 @@ final class Give_iATS_Gateway {
 function give_iats_plugin_init() {
 	if ( class_exists( 'Give' ) ) {
 		Give_iATS_Gateway::get_instance()
-		                 ->load_files()
-		                 ->setup_hooks();
+		                 ->load_files();
 	}
 }
 
