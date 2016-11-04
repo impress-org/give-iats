@@ -146,7 +146,7 @@ add_action( 'give_checkout_error_checks', 'give_iats_varify_donation_data', 9999
  */
 function give_iats_donation_refund( $do_change, $donation_id, $new_status, $old_status ) {
 	$donation = new Give_Payment( $donation_id );
-	
+
 	// Bailout.
 	if ( 'refunded' !== $new_status || 'iatspayments' !== $donation->gateway || empty( $_POST['give_refund_in_iats'] ) ) {
 		return $do_change;

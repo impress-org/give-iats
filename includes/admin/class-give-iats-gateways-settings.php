@@ -102,39 +102,39 @@ class Give_iATS_Gateway_Settings {
 				'name' => __( 'iATS Settings', 'give-iatspayments' ),
 				'desc' => '<hr>',
 				'id'   => 'give_iats_title',
-				'type' => 'give_title'
+				'type' => 'give_title',
 			),
 			array(
-				'name'   => esc_html__( 'Payment method label', 'give-iatspayments' ),
+				'name'    => esc_html__( 'Payment method label', 'give-iatspayments' ),
 				'id'      => 'iats_payment_method_label',
 				'type'    => 'text',
 				'default' => esc_html__( 'Credit Card', 'give-iatspayments' ),
 				'desc'    => __( 'Payment method label will be appear on frontend.', 'give-iatspayments' ),
 			),
 			array(
-				'name'   => esc_html__( 'Sandbox Agent Code', 'give-iatspayments' ),
-				'id'      => 'iats_sandbox_agent_code',
-				'type'    => 'text',
-				'desc'    => __( 'Required agent code provided by iATS.', 'give-iatspayments' ),
+				'name' => esc_html__( 'Sandbox Agent Code', 'give-iatspayments' ),
+				'id'   => 'iats_sandbox_agent_code',
+				'type' => 'text',
+				'desc' => __( 'Required agent code provided by iATS.', 'give-iatspayments' ),
 			),
 			array(
-				'name'   => __( 'Sandbox Agent Password', 'give-iatspayments' ),
-				'id'      => 'iats_sandbox_agent_password',
-				'type'    => 'text',
-				'desc'    => esc_html__( 'Required password provided by iATS.', 'give-iatspayments' ),
+				'name' => __( 'Sandbox Agent Password', 'give-iatspayments' ),
+				'id'   => 'iats_sandbox_agent_password',
+				'type' => 'text',
+				'desc' => esc_html__( 'Required password provided by iATS.', 'give-iatspayments' ),
 			),
 			array(
 				'name' => esc_html__( 'Live Agent Code', 'give-iatspayments' ),
-				'id'    => 'iats_live_agent_code',
-				'type'  => 'text',
-				'desc'  => __( 'Required agent code provided by iATS.', 'give-iatspayments' ),
+				'id'   => 'iats_live_agent_code',
+				'type' => 'text',
+				'desc' => __( 'Required agent code provided by iATS.', 'give-iatspayments' ),
 			),
 			array(
 				'name' => __( 'Live Agent Password', 'give-iatspayments' ),
-				'id'    => 'iats_live_agent_password',
-				'type'  => 'text',
-				'desc'  => esc_html__( 'Required password provided by iATS.', 'give-iatspayments' ),
-			)
+				'id'   => 'iats_live_agent_password',
+				'type' => 'text',
+				'desc' => esc_html__( 'Required password provided by iATS.', 'give-iatspayments' ),
+			),
 		);
 
 		return array_merge( $settings, $iats_settings );
@@ -155,7 +155,7 @@ class Give_iATS_Gateway_Settings {
 			jQuery(document).ready(function ($) {
 				$('select[name=give-payment-status]').change(function () {
 
-					if ('refunded' == $(this).val() ) {
+					if ('refunded' == $(this).val()) {
 						$(this)
 							.closest('div')
 							.append('<p id="give-iats-refund"><input type="checkbox" id="give_refund_in_iats" name="give_refund_in_iats" value="1"/><label for="give_refund_in_iats"><?php _e( 'Refund Charge in iATS?', 'give-iatspayments' ); ?></label></p>');

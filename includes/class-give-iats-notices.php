@@ -113,7 +113,7 @@ class Give_iATS_Notices {
 		if ( $error_message = $this->get_reject_code( $error_code ) ) {
 
 			// Show error.
-			give_output_error( $error_message , true, 'error' );
+			give_output_error( $error_message, true, 'error' );
 		}
 	}
 

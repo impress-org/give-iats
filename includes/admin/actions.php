@@ -52,7 +52,7 @@ function give_iats_check_dependancies() {
 	if ( ! $reset_settings ) {
 		return;
 	}
-	
+
 	// Deactivate iats payment gateways: It has some currency dependency.
 	unset( $_POST['gateways']['iatspayments'] );
 }

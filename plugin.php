@@ -124,7 +124,7 @@ final class Give_iATS_Gateway {
 	 */
 	function setup_hooks() {
 		// Admin only scripts.
-		if( ! is_admin() ) {
+		if ( ! is_admin() ) {
 			return self::$instance;
 		}
 		// Load scripts and style.
