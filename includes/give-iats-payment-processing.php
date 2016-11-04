@@ -35,6 +35,7 @@ function give_process_iats_payment( $donation_data ) {
 		'country'          => $donation_data['post_data']['billing_country'],
 		'zipCode'          => $donation_data['post_data']['card_zip'],
 		'total'            => $donation_data['post_data']['give-amount'],
+		'comment'          => 'givewp',
 		'currency'         => give_get_currency(),
 		'mop'              => give_iats_get_card_name_by_type( $card['type'] ),
 	);
