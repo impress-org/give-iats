@@ -92,7 +92,7 @@ class Give_iATS_Notices {
 	 * Setup hooks.
 	 */
 	public function setup_hook() {
-		add_action( 'give_pre_form_output', array( $this, 'show_frontend_notices' ) );
+		add_action( 'give_pre_form', array( $this, 'show_frontend_notices' ) );
 		add_action( 'admin_notices', array( $this, 'show_admin_notices' ) );
 	}
 
@@ -113,7 +113,7 @@ class Give_iATS_Notices {
 		if ( $error_message = $this->get_reject_code( $error_code ) ) {
 
 			// Show error.
-			give_output_error( $error_message, true, 'error' );
+			give_output_error( $error_message, true, "iats-error-{$error_code}" );
 		}
 	}
 
