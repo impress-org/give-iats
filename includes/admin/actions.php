@@ -63,33 +63,29 @@ add_action( 'admin_notices', 'give_iats_check_dependancies' );
 /**
  * Add message when iATS disable by currency.
  *
- * @param array $messages
- *
  * @return mixed
  */
 function give_iats_disable_by_currency() {
 	?>
-	<div class="notice notice-error is-dismissible">
-		<p>
+    <div class="notice notice-error is-dismissible">
+        <p>
 			<?php echo esc_html__( 'iATS payment gateway disabled automatically because you do not have required currency ( USD, CAD, GBA, EUR ).', 'give-iatspayments' ); ?>
-		</p>
-	</div>
+        </p>
+    </div>
 	<?php
 }
 
 /**
  * Add message when iATS disable by agent credentials.
  *
- * @param array $messages
- *
  * @return mixed
  */
 function give_iats_disable_by_agent_credentials() {
 	?>
-	<div class="notice notice-error is-dismissible">
-		<p>
+    <div class="notice notice-error is-dismissible">
+        <p>
 			<?php echo __( 'iATS payment gateway disabled automatically because agent credentials is not correct.', 'give-iatspayments' ); ?>
-		</p>
-	</div>
+        </p>
+    </div>
 	<?php
 }
