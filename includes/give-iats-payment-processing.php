@@ -8,7 +8,7 @@
  */
 function give_process_iats_payment( $donation_data ) {
 	if ( ! wp_verify_nonce( $donation_data['gateway_nonce'], 'give-gateway' ) ) {
-		wp_die( esc_html__( 'Nonce verification has failed.', 'give-iatspayments' ), esc_html__( 'Error', 'give' ), array( 'response' => 403 ) );
+		wp_die( esc_html__( 'Nonce verification has failed.', 'give-iats' ), esc_html__( 'Error', 'give' ), array( 'response' => 403 ) );
 	}
 
 	// Get card info.
@@ -45,7 +45,7 @@ function give_process_iats_payment( $donation_data ) {
 
 	// Verify successful call
 	if ( ! isset( $response['AUTHORIZATIONRESULT'] ) || 'OK' != substr( trim( $response['AUTHORIZATIONRESULT'] ), 0, 2 ) ) {
-		give_record_gateway_error( __( ' Error', 'give-iatspayments' ), sprintf( __( 'There was an error processing your payment (iATS\'s API was down). Error: %s', 'give-iatspayments' ), json_encode( $response ) ), 0 );
+		give_record_gateway_error( __( ' Error', 'give-iats' ), sprintf( __( 'There was an error processing your payment (iATS\'s API was down). Error: %s', 'give-iats' ), json_encode( $response ) ), 0 );
 
 		// Redirect to donation form.
 		give_send_back_to_checkout( array(
@@ -125,7 +125,7 @@ function give_iats_varify_donation_data( $donation_data ) {
 	$card_name = give_iats_get_card_name_by_type( $card['type'] );
 
 	if ( empty( $card_name ) ) {
-		give_set_error( 'give-credit-card-type', __( 'This card is not supported. Please use another card for donation.', 'give-iatspayments' ) );
+		give_set_error( 'give-credit-card-type', __( 'This card is not supported. Please use another card for donation.', 'give-iats' ) );
 	}
 }
 
@@ -163,7 +163,7 @@ function give_iats_donation_refund( $do_change, $donation_id, $new_status, $old_
 	$request = array(
 		'transactionId' => give_get_payment_transaction_id( $donation->ID ),
 		'total'         => - $donation->total,
-		'comment'       => sprintf( __( "Refund for donation %d", 'give-iatspayments' ), $donation->ID ),
+		'comment'       => sprintf( __( "Refund for donation %d", 'give-iats' ), $donation->ID ),
 	);
 
 	// Make the API call using the ProcessLink service.

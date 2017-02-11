@@ -69,7 +69,7 @@ function give_iats_disable_by_currency() {
 	?>
     <div class="notice notice-error is-dismissible">
         <p>
-			<?php echo esc_html__( 'iATS payment gateway disabled automatically because you do not have required currency ( USD, CAD, GBA, EUR ).', 'give-iatspayments' ); ?>
+			<?php echo esc_html__( 'iATS payment gateway disabled automatically because you do not have required currency ( USD, CAD, GBA, EUR ).', 'give-iats' ); ?>
         </p>
     </div>
 	<?php
@@ -84,7 +84,7 @@ function give_iats_disable_by_agent_credentials() {
 	?>
     <div class="notice notice-error is-dismissible">
         <p>
-			<?php echo __( 'iATS payment gateway disabled automatically because agent credentials is not correct.', 'give-iatspayments' ); ?>
+			<?php echo __( 'iATS payment gateway disabled automatically because agent credentials is not correct.', 'give-iats' ); ?>
         </p>
     </div>
 	<?php

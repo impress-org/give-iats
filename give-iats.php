@@ -1,8 +1,8 @@
 <?php
 /**
- * Plugin Name: Give - iATS Payments
+ * Plugin Name: Give - iATS Gateway
  * Plugin URI: http://givewp.com
- * Description: The most robust, flexible, and intuitive way to accept donations on WordPress with Give plugin by iATS payment gateway.
+ * Description: iATS payment gateway.
  * Author: WordImpress
  * Author URI: https://wordimpress.com
  * Version: 1.0
