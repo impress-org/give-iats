@@ -11,6 +11,25 @@
  * GitHub Plugin URI: https://github.com/WordImpress/Give-iATS
  */
 
+// iATS Constants.
+if ( ! defined( 'GIVE_IATS_VERSION' ) ) {
+	define( 'GIVE_IATS_VERSION', '1.0' );
+}
+if ( ! defined( 'GIVE_IATS_MIN_GIVE_VERSION' ) ) {
+	define( 'GIVE_IATS_MIN_GIVE_VERSION', '1.8' );
+}
+if ( ! defined( 'GIVE_IATS_PLUGIN_FILE' ) ) {
+	define( 'GIVE_IATS_PLUGIN_FILE', __FILE__ );
+}
+if ( ! defined( 'GIVE_IATS_PLUGIN_DIR' ) ) {
+	define( 'GIVE_IATS_PLUGIN_DIR', dirname( __FILE__ ) );
+}
+if ( ! defined( 'GIVE_IATS_PLUGIN_URL' ) ) {
+	define( 'GIVE_IATS_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
+}
+if ( ! defined( 'GIVE_IATS_BASENAME' ) ) {
+	define( 'GIVE_IATS_BASENAME', plugin_basename( __FILE__ ) );
+}
 
 /**
  * Class Give_iATS_Gateway
@@ -60,6 +79,13 @@ final class Give_iATS_Gateway {
 	 * @return Give_iATS_Gateway
 	 */
 	public function load_files() {
+
+		if ( is_admin() ) {
+			// Add actions.
+			require_once 'includes/admin/give-iats-activation.php';
+			require_once 'includes/admin/give-iats-actions.php';
+		}
+
 		// iATS payment gateways core.
 		require_once 'includes/lib/iATSPayments/iATS.php';
 
@@ -78,10 +104,6 @@ final class Give_iATS_Gateway {
 		// Process payments.
 		require_once 'includes/give-iats-payment-processing.php';
 
-		if ( is_admin() ) {
-			// Add actions.
-			require_once 'includes/admin/actions.php';
-		}
 
 		return self::$instance;
 	}
