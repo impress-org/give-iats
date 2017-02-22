@@ -57,12 +57,16 @@ function give_iats_activation_banner() {
 
 	}
 
-	//Check for activation banner inclusion.
-	if ( ! class_exists( 'Give_Addon_Activation_Banner' )
-	     && file_exists( GIVE_PLUGIN_DIR . 'includes/admin/class-addon-activation-banner.php' )
-	) {
+	// Show activation banner.
+	if ( is_admin() ) {
 
-		include GIVE_PLUGIN_DIR . 'includes/admin/class-addon-activation-banner.php';
+		// Check for activation banner inclusion.
+		if ( ! class_exists( 'Give_Addon_Activation_Banner' )
+		     && file_exists( GIVE_PLUGIN_DIR . 'includes/admin/class-addon-activation-banner.php' )
+		) {
+
+			include GIVE_PLUGIN_DIR . 'includes/admin/class-addon-activation-banner.php';
+		}
 
 		//Only runs on admin
 		$args = array(
