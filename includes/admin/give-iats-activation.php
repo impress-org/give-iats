@@ -26,7 +26,7 @@ function give_iats_activation_banner() {
 	$is_give_active = defined( 'GIVE_PLUGIN_BASENAME' ) ? is_plugin_active( GIVE_PLUGIN_BASENAME ) : false;
 
 	//Check to see if Give is activated, if it isn't deactivate and show a banner
-	if ( is_admin() && current_user_can( 'activate_plugins' ) && ! $is_give_active ) {
+	if ( current_user_can( 'activate_plugins' ) && ! $is_give_active ) {
 
 		add_action( 'admin_notices', 'give_iats_activation_notice' );
 
@@ -57,26 +57,26 @@ function give_iats_activation_banner() {
 
 	}
 
-	// Show activation banner.
-	if ( is_admin() ) {
+	// Check for activation banner inclusion.
+	if ( ! class_exists( 'Give_Addon_Activation_Banner' )
+	     && file_exists( GIVE_PLUGIN_DIR . 'includes/admin/class-addon-activation-banner.php' )
+	) {
 
-		// Check for activation banner inclusion.
-		if ( ! class_exists( 'Give_Addon_Activation_Banner' )
-		     && file_exists( GIVE_PLUGIN_DIR . 'includes/admin/class-addon-activation-banner.php' )
-		) {
+		include GIVE_PLUGIN_DIR . 'includes/admin/class-addon-activation-banner.php';
+	}
 
-			include GIVE_PLUGIN_DIR . 'includes/admin/class-addon-activation-banner.php';
-		}
+	// Initialize activation welcome banner.
+	if ( class_exists( 'Give_Addon_Activation_Banner' ) ) {
 
-		//Only runs on admin
+		// Only runs on admin
 		$args = array(
 			'file'              => __FILE__,
-			'name'              => __( 'Authorize.net Gateway', 'give-iats' ),
+			'name'              => __( 'iATS Gateway', 'give-iats' ),
 			'version'           => GIVE_IATS_VERSION,
-			'settings_url'      => admin_url( 'edit.php?post_type=give_forms&page=give-settings&tab=gateways' ),
-			'documentation_url' => 'https://givewp.com/documentation/add-ons/authorize-net-gateway/',
+			'settings_url'      => admin_url( 'edit.php?post_type=give_forms&page=give-settings&tab=gateways&section=iats-settings' ),
+			'documentation_url' => 'http://docs.givewp.com/addon-iats',
 			'support_url'       => 'https://givewp.com/support/',
-			'testing'           => false //Never leave as true!
+			'testing'           => false, //Never leave as true!
 		);
 
 		new Give_Addon_Activation_Banner( $args );
@@ -121,7 +121,7 @@ function give_iats_plugin_action_links( $actions ) {
 	$new_actions = array(
 		'settings' => sprintf(
 			'<a href="%1$s">%2$s</a>',
-			admin_url( 'edit.php?post_type=give_forms&page=give-settings&tab=gateways' ),
+			admin_url( 'edit.php?post_type=give_forms&page=give-settings&tab=gateways&section=iats-settings' ),
 			esc_html__( 'Settings', 'give-iats' )
 		),
 	);
@@ -155,7 +155,7 @@ function give_iats_plugin_row_meta( $plugin_meta, $plugin_file ) {
 					'utm_source'   => 'plugins-page',
 					'utm_medium'   => 'plugin-row',
 					'utm_campaign' => 'admin',
-				), 'https://givewp.com/documentation/add-ons/iats-gateway/' )
+				), 'http://docs.givewp.com/addon-iats' )
 			),
 			esc_html__( 'Documentation', 'give-iats' )
 		),
