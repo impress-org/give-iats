@@ -22,41 +22,6 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 function give_iats_activation_banner() {
 
-	// Check for if give plugin activate or not.
-	$is_give_active = defined( 'GIVE_PLUGIN_BASENAME' ) ? is_plugin_active( GIVE_PLUGIN_BASENAME ) : false;
-
-	//Check to see if Give is activated, if it isn't deactivate and show a banner
-	if ( current_user_can( 'activate_plugins' ) && ! $is_give_active ) {
-
-		add_action( 'admin_notices', 'give_iats_activation_notice' );
-
-		//Don't let this plugin activate
-		deactivate_plugins( GIVE_IATS_BASENAME );
-
-		if ( isset( $_GET['activate'] ) ) {
-			unset( $_GET['activate'] );
-		}
-
-		return false;
-
-	}
-
-	//Check minimum Give version.
-	if ( defined( 'GIVE_VERSION' ) && version_compare( GIVE_VERSION, GIVE_IATS_MIN_GIVE_VERSION, '<' ) ) {
-
-		add_action( 'admin_notices', 'give_iats_min_version_notice' );
-
-		//Don't let this plugin activate.
-		deactivate_plugins( GIVE_IATS_BASENAME );
-
-		if ( isset( $_GET['activate'] ) ) {
-			unset( $_GET['activate'] );
-		}
-
-		return false;
-
-	}
-
 	// Check for activation banner inclusion.
 	if ( ! class_exists( 'Give_Addon_Activation_Banner' )
 	     && file_exists( GIVE_PLUGIN_DIR . 'includes/admin/class-addon-activation-banner.php' )
@@ -88,24 +53,6 @@ function give_iats_activation_banner() {
 }
 
 add_action( 'admin_init', 'give_iats_activation_banner' );
-
-/**
- * Notice for no Give core deactivated.
- *
- * @since 1.0
- */
-function give_iats_activation_notice() {
-	echo '<div class="error"><p>' . __( '<strong>Activation Error:</strong> You must have the <a href="https://givewp.com/" target="_blank">Give</a> plugin installed and activated for the iATS add-on to activate.', 'give-iats' ) . '</p></div>';
-}
-
-/**
- * Notice for min-version not met.
- *
- * @since 1.0
- */
-function give_iats_min_version_notice() {
-	echo '<div class="error"><p>' . sprintf( __( '<strong>Activation Error:</strong> You must have <a href="%s" target="_blank">Give</a> version %s+ for the iATS add-on to activate.', 'give-iats' ), 'https://givewp.com', GIVE_IATS_MIN_GIVE_VERSION ) . '</p></div>';
-}
 
 
 /**

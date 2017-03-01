@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Give - iATS Gateway
  * Plugin URI: http://givewp.com
- * Description: iATS payment gateway.
+ * Description: Process online donations via the iATS payment gateway.
  * Author: WordImpress
  * Author URI: https://wordimpress.com
  * Version: 1.0
@@ -16,7 +16,7 @@ if ( ! defined( 'GIVE_IATS_VERSION' ) ) {
 	define( 'GIVE_IATS_VERSION', '1.0' );
 }
 if ( ! defined( 'GIVE_IATS_MIN_GIVE_VERSION' ) ) {
-	define( 'GIVE_IATS_MIN_GIVE_VERSION', '1.8' );
+	define( 'GIVE_IATS_MIN_GIVE_VERSION', '1.8.4' );
 }
 if ( ! defined( 'GIVE_IATS_PLUGIN_FILE' ) ) {
 	define( 'GIVE_IATS_PLUGIN_FILE', __FILE__ );
@@ -104,7 +104,6 @@ final class Give_iATS_Gateway {
 		// Process payments.
 		require_once 'includes/give-iats-payment-processing.php';
 
-
 		return self::$instance;
 	}
 
@@ -142,12 +141,75 @@ final class Give_iATS_Gateway {
 	}
 }
 
-// Initiate plugin.
+/**
+ * Initialize the plugin
+ */
 function give_iats_plugin_init() {
-	if ( class_exists( 'Give' ) ) {
-		Give_iATS_Gateway::get_instance()
-		                 ->load_files();
+	// We need Give to continue.
+	if ( give_iats_check_environment() ) {
+		Give_iATS_Gateway::get_instance()->load_files();
 	}
 }
 
-add_action( 'plugins_loaded', 'give_iats_plugin_init' );
+add_action( 'init', 'give_iats_plugin_init' );
+
+
+/**
+ * Check the environment before starting up.
+ *
+ * @since 1.0
+ *
+ * @return bool
+ */
+function give_iats_check_environment() {
+
+	// Check for if give plugin activate or not.
+	$is_give_active = defined( 'GIVE_PLUGIN_BASENAME' ) ? true : false;
+
+	// Check to see if Give is activated, if it isn't deactivate and show a banner
+	if ( current_user_can( 'activate_plugins' ) && ! $is_give_active ) {
+		add_action( 'admin_notices', 'give_iats_activation_notice' );
+		add_action( 'admin_init', 'give_iats_deactivate_self' );
+		return false;
+	}
+
+	// Check minimum Give version.
+	if ( defined( 'GIVE_VERSION' ) && version_compare( GIVE_VERSION, GIVE_IATS_MIN_GIVE_VERSION, '<' ) ) {
+		add_action( 'admin_notices', 'give_iats_min_version_notice' );
+		add_action( 'admin_init', 'give_iats_deactivate_self' );
+		return false;
+	}
+
+	return true;
+
+}
+
+/**
+ * Deactivate self. Must be hooked with admin_init.
+ *
+ * Currently hooked via give_iats_check_environment()
+ */
+function give_iats_deactivate_self() {
+	deactivate_plugins( GIVE_IATS_BASENAME );
+	if ( isset( $_GET['activate'] ) ) {
+		unset( $_GET['activate'] );
+	}
+}
+
+/**
+ * Notice for no Give core deactivated.
+ *
+ * @since 1.0
+ */
+function give_iats_activation_notice() {
+	echo '<div class="error"><p>' . __( '<strong>Activation Error:</strong> You must have the <a href="https://givewp.com/" target="_blank">Give</a> plugin installed and activated for the iATS add-on to activate.', 'give-iats' ) . '</p></div>';
+}
+
+/**
+ * Notice for min-version not met.
+ *
+ * @since 1.0
+ */
+function give_iats_min_version_notice() {
+	echo '<div class="error"><p>' . sprintf( __( '<strong>Activation Error:</strong> You must have <a href="%1$s" target="_blank">Give</a> version %2$s+ for the iATS add-on to activate.', 'give-iats' ), 'https://givewp.com', GIVE_IATS_MIN_GIVE_VERSION ) . '</p></div>';
+}
