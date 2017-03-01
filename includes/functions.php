@@ -69,7 +69,7 @@ function give_iats_get_card_name_by_type( $card_type ) {
 
 
 /**
- * Get iATS paymetn gateways server.
+ * Get iATS payment gateways server.
  *
  * @return string $server Server name.
  */
@@ -105,12 +105,16 @@ function give_iats_get_payment_method_label() {
  * @return array
  */
 function give_iats_get_agent_credentials() {
+
 	$give_settings = give_get_settings();
+
+	// Test credentials.
 	$credentials   = array(
 		'code'     => $give_settings['iats_sandbox_agent_code'],
 		'password' => $give_settings['iats_sandbox_agent_password'],
 	);
 
+	// Live credentials.
 	if ( ! give_is_test_mode() ) {
 		$credentials = array(
 			'code'     => $give_settings['iats_live_agent_code'],
