@@ -6,8 +6,15 @@
  * @since 1.0
  */
 class Give_iATS_Notices {
+
+	/**
+	 * @var
+	 */
 	static private $instance;
 
+	/**
+	 * Give_iATS_Notices constructor.
+	 */
 	private function __construct() {
 	}
 
@@ -63,6 +70,7 @@ class Give_iATS_Notices {
 
 	/**
 	 * Get rejected codes.
+	 *
 	 * @see https://www.iatspayments.com/english/help/rejects.html
 	 *
 	 * @param int|null $code Error code value.
@@ -123,6 +131,7 @@ class Give_iATS_Notices {
 	 * @param string $form_id Form ID.
 	 */
 	public function show_admin_notices( $form_id ) {
+
 		// Bailout.
 		if ( ! is_admin() || ! isset( $_GET['give-iats-message'] ) ) {
 			return;
@@ -133,11 +142,11 @@ class Give_iATS_Notices {
 
 		if ( $error_message = $this->get_reject_code( $error_code ) ) {
 			?>
-			<div class="notice notice-error is-dismissible">
-				<p>
-					<strong><?php _e( 'iATS donation refund error: ', 'give-iats' ); ?></strong><?php echo $error_message; ?>
-				</p>
-			</div>
+            <div class="notice notice-error is-dismissible">
+                <p>
+                    <strong><?php _e( 'iATS donation refund error: ', 'give-iats' ); ?></strong><?php echo $error_message; ?>
+                </p>
+            </div>
 			<?php
 		}
 	}

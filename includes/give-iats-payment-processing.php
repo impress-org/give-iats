@@ -103,12 +103,13 @@ function give_process_iats_payment( $donation_data ) {
 	give_update_payment_status( $payment, 'publish' );
 
 	// Update transaction id.
-	give_set_payment_transaction_id( $payment, $response['TRANSACTIONID'] );
+	give_set_payment_transaction_id( $payment, trim( $response['TRANSACTIONID'] ) );
 
-	// Add iats payment response meta.
-	update_post_meta( $payment, 'iats_donation_response', $response );
+	// Add iATS payment meta.
+	update_post_meta( $payment, '_iats_donation_response', $response );
+	update_post_meta( $payment, '_iats_mop', give_iats_get_card_name_by_type( $card['type'] ) );
 
-	// Send to success page.
+	// Send to success page.9
 	give_send_to_success_page();
 }
 
@@ -121,7 +122,7 @@ add_action( 'give_gateway_iatspayments', 'give_process_iats_payment' );
  *
  * @param $donation_data
  */
-function give_iats_varify_donation_data( $donation_data ) {
+function give_iats_verify_donation_data( $donation_data ) {
 	// Bailout: Validation only for iats payment gateway.
 	if ( 'iatspayments' !== $donation_data['gateway'] ) {
 		return;
@@ -132,11 +133,11 @@ function give_iats_varify_donation_data( $donation_data ) {
 	$card_name = give_iats_get_card_name_by_type( $card['type'] );
 
 	if ( empty( $card_name ) ) {
-		give_set_error( 'give-credit-card-type', __( 'This card is not supported. Please use another card for donation.', 'give-iats' ) );
+		give_set_error( 'give-credit-card-type', __( 'This card type is not supported. Please use another card for your donation.', 'give-iats' ) );
 	}
 }
 
-add_action( 'give_checkout_error_checks', 'give_iats_varify_donation_data', 99999 );
+add_action( 'give_checkout_error_checks', 'give_iats_verify_donation_data', 99999 );
 
 
 /**
@@ -156,9 +157,14 @@ function give_iats_donation_refund( $do_change, $donation_id, $new_status, $old_
 	$donation = new Give_Payment( $donation_id );
 
 	// Bailout.
-	if ( 'refunded' !== $new_status || 'iatspayments' !== $donation->gateway || empty( $_POST['give_refund_in_iats'] ) ) {
+	if (
+		'refunded' !== $new_status
+		|| 'iatspayments' !== $donation->gateway
+		|| empty( $_POST['give_refund_in_iats'] )
+	) {
 		return $do_change;
 	}
+
 
 	// Get agent credentials.
 	$agent_credential = give_iats_get_agent_credentials();
@@ -169,9 +175,10 @@ function give_iats_donation_refund( $do_change, $donation_id, $new_status, $old_
 	$iATS_PL = new iATS\ProcessLink( $agentCode, $password, give_iats_get_server_name() );
 
 	$request = array(
-		'transactionId' => give_get_payment_transaction_id( $donation->ID ),
-		'total'         => - $donation->total,
-		'comment'       => sprintf( __( 'Refund for donation %d', 'give-iats' ), $donation->ID ),
+		'transactionId' => trim( give_get_payment_transaction_id( $donation->ID ) ),
+		'total'         => "-{$donation->total}",
+		'currency'      => $donation->currency,
+		'comment'       => sprintf( __( 'Refund for donation #%d', 'give-iats' ), $donation->ID ),
 	);
 
 	// Make the API call using the ProcessLink service.
@@ -191,12 +198,17 @@ function give_iats_donation_refund( $do_change, $donation_id, $new_status, $old_
 		$url = home_url( "/{$url_data['path']}?" . http_build_query( $url_query ) );
 
 		// Redirect.
-
 		wp_safe_redirect( $url );
 		exit();
+
 	}
 
-	// Add iats payment response meta.
+	// Add note to payment.
+	if ( isset( $request['TRANSACTIONID'] ) ) {
+		give_insert_payment_note( $donation->ID, sprintf( __( 'iATS transaction ID #%s successfully reversed in iATS.', 'give' ), $request['TRANSACTIONID'] ) );
+	}
+
+	// Add iATS payment response meta.
 	update_post_meta( $donation->ID, 'iats_refund_response', $response );
 
 	// Add refund transaction id.
