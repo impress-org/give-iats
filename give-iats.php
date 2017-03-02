@@ -1,12 +1,12 @@
 <?php
 /**
  * Plugin Name: Give - iATS Gateway
- * Plugin URI: http://givewp.com
+ * Plugin URI: https://givewp.com
  * Description: Process online donations via the iATS payment gateway.
  * Author: WordImpress
  * Author URI: https://wordimpress.com
  * Version: 1.0
- * Text Domain: give-iatspayments
+ * Text Domain: give-iats
  * Domain Path: /languages
  * GitHub Plugin URI: https://github.com/WordImpress/Give-iATS
  */
@@ -251,3 +251,15 @@ function give_iats_activation_notice() {
 function give_iats_min_version_notice() {
 	echo '<div class="error"><p>' . sprintf( __( '<strong>Activation Error:</strong> You must have <a href="%1$s" target="_blank">Give</a> version %2$s+ for the iATS add-on to activate.', 'give-iats' ), 'https://givewp.com', GIVE_IATS_MIN_GIVE_VERSION ) . '</p></div>';
 }
+
+/**
+ * Give - iATS Add-on Licensing
+ */
+function give_add_iats_licensing() {
+
+	if ( class_exists( 'Give_License' ) ) {
+		new Give_License( __FILE__, 'iATS Gateway', GIVE_IATS_VERSION, 'WordImpress' );
+	}
+}
+
+add_action( 'plugins_loaded', 'give_add_iats_licensing' );

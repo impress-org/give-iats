@@ -140,8 +140,8 @@ class Give_iATS_Gateway_Settings {
 				'id'          => 'iats_billing_details',
 				'type'        => 'radio_inline',
 				'options'     => array(
-					'enabled'  => esc_html__( 'Enabled', 'give-iats' ),
-					'disabled' => esc_html__( 'Disabled', 'give-iats' ),
+					'enabled'  => __( 'Enabled', 'give-iats' ),
+					'disabled' => __( 'Disabled', 'give-iats' ),
 				),
 				'default'     => 'disabled',
 				'description' => __( 'This option will enable the billing details section for iATS which requires the donor\'s address to complete the donation. These fields are not required by iATS to process the transaction, but you may have the need to collect the data.', 'give-iats' ),
