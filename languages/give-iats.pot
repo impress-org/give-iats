@@ -1,0 +1,325 @@
+# Copyright (C) 2017 Give-iATS
+# This file is distributed under the same license as the Give-iATS package.
+msgid ""
+msgstr ""
+"Project-Id-Version: Give-iATS\n"
+"Report-Msgid-Bugs-To: https://github.com/WordImpress/Give-iATS/issues/new\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2017-MO-DA HO:MI+ZONE\n"
+"Language-Team: WordImpress <info@wordimpress.com>\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.js\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: give-iats.php:243
+msgid "<strong>Activation Error:</strong> You must have the <a href=\"https://givewp.com/\" target=\"_blank\">Give</a> plugin installed and activated for the iATS add-on to activate."
+msgstr ""
+
+#: give-iats.php:252
+msgid "<strong>Activation Error:</strong> You must have <a href=\"%1$s\" target=\"_blank\">Give</a> version %2$s+ for the iATS add-on to activate."
+msgstr ""
+
+#: includes/admin/class-give-iats-gateways-settings.php:51, includes/admin/class-give-iats-gateways-settings.php:102
+msgid "iATS Payments"
+msgstr ""
+
+#: includes/admin/class-give-iats-gateways-settings.php:108
+msgid "Payment Method Label"
+msgstr ""
+
+#: includes/admin/class-give-iats-gateways-settings.php:111, includes/functions.php:77
+msgid "Credit Card"
+msgstr ""
+
+#: includes/admin/class-give-iats-gateways-settings.php:112
+msgid "Payment method label will be appear on frontend."
+msgstr ""
+
+#: includes/admin/class-give-iats-gateways-settings.php:115
+msgid "Live Agent Code"
+msgstr ""
+
+#: includes/admin/class-give-iats-gateways-settings.php:118, includes/admin/class-give-iats-gateways-settings.php:130
+msgid "Required agent code provided by iATS."
+msgstr ""
+
+#: includes/admin/class-give-iats-gateways-settings.php:121
+msgid "Live Agent Password"
+msgstr ""
+
+#: includes/admin/class-give-iats-gateways-settings.php:124, includes/admin/class-give-iats-gateways-settings.php:136
+msgid "Required password provided by iATS."
+msgstr ""
+
+#: includes/admin/class-give-iats-gateways-settings.php:127
+msgid "Sandbox Agent Code"
+msgstr ""
+
+#: includes/admin/class-give-iats-gateways-settings.php:133
+msgid "Sandbox Agent Password"
+msgstr ""
+
+#: includes/admin/class-give-iats-gateways-settings.php:139
+msgid "Collect Billing Details"
+msgstr ""
+
+#: includes/admin/class-give-iats-gateways-settings.php:143
+msgid "Enabled"
+msgstr ""
+
+#: includes/admin/class-give-iats-gateways-settings.php:144
+msgid "Disabled"
+msgstr ""
+
+#: includes/admin/class-give-iats-gateways-settings.php:147
+msgid "This option will enable the billing details section for iATS which requires the donor's address to complete the donation. These fields are not required by iATS to process the transaction, but you may have the need to collect the data."
+msgstr ""
+
+#: includes/admin/class-give-iats-gateways-settings.php:172
+msgid "Refund Charge in iATS?"
+msgstr ""
+
+#: includes/admin/give-iats-actions.php:72
+msgid "iATS payment gateway disabled automatically because you do not have required currency ( USD, CAD, GBA, EUR )."
+msgstr ""
+
+#: includes/admin/give-iats-actions.php:87
+msgid "iATS payment gateway disabled automatically because agent credentials is not correct."
+msgstr ""
+
+#: includes/admin/give-iats-activation.php:39
+msgid "iATS Gateway"
+msgstr ""
+
+#: includes/admin/give-iats-activation.php:72
+msgid "Settings"
+msgstr ""
+
+#: includes/admin/give-iats-activation.php:107
+msgid "Documentation"
+msgstr ""
+
+#: includes/admin/give-iats-activation.php:117
+msgid "Add-ons"
+msgstr ""
+
+#: includes/class-give-iats-notices.php:28
+msgid "Agent code has not been set up on the authorization system. Please call iATS at 1-888-955-5455."
+msgstr ""
+
+#: includes/class-give-iats-notices.php:29
+msgid "Unable to process transaction. Verify and re-enter credit card information."
+msgstr ""
+
+#: includes/class-give-iats-notices.php:30
+msgid "Invalid Customer Code."
+msgstr ""
+
+#: includes/class-give-iats-notices.php:31
+msgid "Incorrect expiration date."
+msgstr ""
+
+#: includes/class-give-iats-notices.php:32
+msgid "Invalid transaction. Verify and re-enter credit card information."
+msgstr ""
+
+#: includes/class-give-iats-notices.php:33, includes/class-give-iats-notices.php:51
+msgid "Please have cardholder call the number on the back of the card."
+msgstr ""
+
+#: includes/class-give-iats-notices.php:34
+msgid "Lost or stolen card."
+msgstr ""
+
+#: includes/class-give-iats-notices.php:35
+msgid "Invalid card status."
+msgstr ""
+
+#: includes/class-give-iats-notices.php:36
+msgid "Restricted card status. Usually on corporate cards restricted to specific sales."
+msgstr ""
+
+#: includes/class-give-iats-notices.php:37
+msgid "Error. Please verify and re-enter credit card information."
+msgstr ""
+
+#: includes/class-give-iats-notices.php:38, includes/class-give-iats-notices.php:41
+msgid "General decline code. Please have client call the number on the back of credit card."
+msgstr ""
+
+#: includes/class-give-iats-notices.php:39
+msgid "Incorrect CVV2 or Expiry date."
+msgstr ""
+
+#: includes/class-give-iats-notices.php:40
+msgid "The card is over the limit."
+msgstr ""
+
+#: includes/class-give-iats-notices.php:42
+msgid "Invalid charge card number. Verify and re-enter credit card information."
+msgstr ""
+
+#: includes/class-give-iats-notices.php:43
+msgid "Unable to authorize transaction. Authorizer needs more information for approval."
+msgstr ""
+
+#: includes/class-give-iats-notices.php:44
+msgid "Card not supported by institution."
+msgstr ""
+
+#: includes/class-give-iats-notices.php:45
+msgid "Incorrect CVV2 security code."
+msgstr ""
+
+#: includes/class-give-iats-notices.php:46
+msgid "Bank timeout. Bank lines may be down or busy. Re-try transaction later."
+msgstr ""
+
+#: includes/class-give-iats-notices.php:47
+msgid "System error. Re-try transaction later."
+msgstr ""
+
+#: includes/class-give-iats-notices.php:48
+msgid "Charge card expired."
+msgstr ""
+
+#: includes/class-give-iats-notices.php:49
+msgid "Capture card. Reported lost or stolen."
+msgstr ""
+
+#: includes/class-give-iats-notices.php:50
+msgid "Invalid transaction, invalid expiry date. Please confirm and retry transaction."
+msgstr ""
+
+#: includes/class-give-iats-notices.php:52
+msgid "Invalid charge card number."
+msgstr ""
+
+#: includes/class-give-iats-notices.php:53
+msgid "Contact IATS 1-888-955-5455."
+msgstr ""
+
+#: includes/class-give-iats-notices.php:54
+msgid "Invalid card number. Card not supported by IATS."
+msgstr ""
+
+#: includes/class-give-iats-notices.php:55
+msgid "Invalid Expiry date."
+msgstr ""
+
+#: includes/class-give-iats-notices.php:56
+msgid "CVV2 required."
+msgstr ""
+
+#: includes/class-give-iats-notices.php:57
+msgid "Incorrect AVS."
+msgstr ""
+
+#: includes/class-give-iats-notices.php:58
+msgid "Credit card name blocked. Call iATS at 1-888-955-5455."
+msgstr ""
+
+#: includes/class-give-iats-notices.php:59
+msgid "Card tumbling. Call iATS at 1-888-955-5455."
+msgstr ""
+
+#: includes/class-give-iats-notices.php:60
+msgid "Name tumbling. Call iATS at 1-888-955-5455."
+msgstr ""
+
+#: includes/class-give-iats-notices.php:61
+msgid "IP blocked. Call iATS at 1-888-955-5455."
+msgstr ""
+
+#: includes/class-give-iats-notices.php:62
+msgid "Velocity 1 – IP block. Call iATS at 1-888-955-5455."
+msgstr ""
+
+#: includes/class-give-iats-notices.php:63
+msgid "Velocity 2 – IP block. Call iATS at 1-888-955-5455."
+msgstr ""
+
+#: includes/class-give-iats-notices.php:64
+msgid "Velocity 3 – IP block. Call iATS at 1-888-955-5455."
+msgstr ""
+
+#: includes/class-give-iats-notices.php:65
+msgid "Credit card BIN country blocked. Call iATS at 1-888-955-5455."
+msgstr ""
+
+#: includes/class-give-iats-notices.php:66
+msgid "DO NOT REPROCESS. Call iATS at 1-888-955-5455."
+msgstr ""
+
+#: includes/class-give-iats-notices.php:67
+msgid "The system has not responded in the time allotted. Call iATS at 1-888-955-5455."
+msgstr ""
+
+#: includes/class-give-iats-notices.php:147
+msgid "iATS donation refund error: "
+msgstr ""
+
+#: includes/give-iats-payment-processing.php:12
+msgid "Nonce verification has failed."
+msgstr ""
+
+#: includes/give-iats-payment-processing.php:12
+msgid "Error"
+msgstr ""
+
+#: includes/give-iats-payment-processing.php:55
+msgid " Error"
+msgstr ""
+
+#: includes/give-iats-payment-processing.php:55
+msgid "There was an error processing your donation payment. Error: %s"
+msgstr ""
+
+#: includes/give-iats-payment-processing.php:93
+msgid "Payment Error"
+msgstr ""
+
+#: includes/give-iats-payment-processing.php:96
+msgid "Payment creation failed before process iATS gateway. Payment data: %s"
+msgstr ""
+
+#: includes/give-iats-payment-processing.php:140
+msgid "This card type is not supported. Please use another card for your donation."
+msgstr ""
+
+#: includes/give-iats-payment-processing.php:184
+msgid "Refund for donation #%d"
+msgstr ""
+
+#: includes/give-iats-payment-processing.php:211
+msgid "iATS transaction ID #%s successfully reversed in iATS."
+msgstr ""
+
+#: includes/give-iats-payment-processing.php:244
+msgid "Refund ID:"
+msgstr ""
+
+#: includes/give-iats-payment-processing.php:268
+msgid "The card number provided is not valid. Please try your donation again with a valid card number."
+msgstr ""
+
+#: includes/give-iats-payment-processing.php:271
+msgid "The CVV2 code security code is incorrect. Please try your donation again with a valid CVV2 number."
+msgstr ""
+
+#: includes/give-iats-payment-processing.php:274
+msgid "The card expiration date is incorrect. Please try your donation again with a valid card expiration date."
+msgstr ""
+
+#: includes/give-iats-payment-processing.php:277
+msgid "The payment gateway is having trouble processing donations at the moment. Please try again later."
+msgstr ""
+
+#: includes/give-iats-payment-processing.php:283
+msgid "An error occurred while processing the donation. Please try again."
+msgstr ""

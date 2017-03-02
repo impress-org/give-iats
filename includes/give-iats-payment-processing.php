@@ -9,7 +9,7 @@
 function give_process_iats_payment( $donation_data ) {
 
 	if ( ! wp_verify_nonce( $donation_data['gateway_nonce'], 'give-gateway' ) ) {
-		wp_die( esc_html__( 'Nonce verification has failed.', 'give-iats' ), esc_html__( 'Error', 'give' ), array( 'response' => 403 ) );
+		wp_die( esc_html__( 'Nonce verification has failed.', 'give-iats' ), esc_html__( 'Error', 'give-iats' ), array( 'response' => 403 ) );
 	}
 
 	// Get card info.
@@ -90,10 +90,10 @@ function give_process_iats_payment( $donation_data ) {
 	if ( ! $payment ) {
 		// Record the error.
 		give_record_gateway_error(
-			esc_html__( 'Payment Error', 'give' ),
+			esc_html__( 'Payment Error', 'give-iats' ),
 			/* translators: %s: payment data */
 			sprintf(
-				esc_html__( 'Payment creation failed before process iATS gateway. Payment data: %s', 'give' ),
+				esc_html__( 'Payment creation failed before process iATS gateway. Payment data: %s', 'give-iats' ),
 				json_encode( $donation_payment_data )
 			),
 			$payment
@@ -208,7 +208,7 @@ function give_iats_donation_refund( $do_change, $donation_id, $new_status, $old_
 
 	// Add note to payment and store refund transaction id.
 	if ( isset( $response['TRANSACTIONID'] ) ) {
-		give_insert_payment_note( $donation->ID, sprintf( __( 'iATS transaction ID #%s successfully reversed in iATS.', 'give' ), $response['TRANSACTIONID'] ) );
+		give_insert_payment_note( $donation->ID, sprintf( __( 'iATS transaction ID #%s successfully reversed in iATS.', 'give-iats' ), $response['TRANSACTIONID'] ) );
 		give_update_payment_meta( $donation->ID, '_give_payment_refund_id', $response['TRANSACTIONID'] );
 	}
 
@@ -241,7 +241,7 @@ function give_iats_show_refund_transaction_id( $donation_id ) {
 		?>
         <div class="give-admin-box-inside">
             <p>
-                <strong><?php esc_html_e( 'Refund ID:', 'give' ); ?></strong>&nbsp;
+                <strong><?php esc_html_e( 'Refund ID:', 'give-iats' ); ?></strong>&nbsp;
 				<?php echo $refund_id; ?>
             </p>
         </div>
