@@ -47,7 +47,7 @@ class Give_iATS_Gateway_Settings {
 	 * Setup hooks.
 	 */
 	public function setup_hooks() {
-		$this->section_id    = 'iatspayments';
+		$this->section_id    = 'iats';
 		$this->section_label = __( 'iATS Payments', 'give-iats' );
 
 		// Add payment gateway to payment gateways list.
@@ -99,13 +99,13 @@ class Give_iATS_Gateway_Settings {
 	public function add_settings( $settings ) {
 		$iats_settings = array(
 			array(
-				'name' => __( 'iATS Settings', 'give-iats' ),
+				'name' => __( 'iATS Payments', 'give-iats' ),
 				'desc' => '<hr>',
 				'id'   => 'give_iats_title',
 				'type' => 'give_title',
 			),
 			array(
-				'name'    => __( 'Payment method label', 'give-iats' ),
+				'name'    => __( 'Payment Method Label', 'give-iats' ),
 				'id'      => 'iats_payment_method_label',
 				'type'    => 'text',
 				'default' => __( 'Credit Card', 'give-iats' ),
@@ -135,6 +135,17 @@ class Give_iATS_Gateway_Settings {
 				'type' => 'api_key',
 				'desc' => __( 'Required password provided by iATS.', 'give-iats' ),
 			),
+			array(
+				'title'       => __( 'Collect Billing Details', 'give-iats' ),
+				'id'          => 'iats_billing_details',
+				'type'        => 'radio_inline',
+				'options'     => array(
+					'enabled'  => esc_html__( 'Enabled', 'give-iats' ),
+					'disabled' => esc_html__( 'Disabled', 'give-iats' ),
+				),
+				'default'     => 'disabled',
+				'description' => __( 'This option will enable the billing details section for iATS which requires the donor\'s address to complete the donation. These fields are not required by iATS to process the transaction, but you may have the need to collect the data.', 'give-iats' ),
+			),
 		);
 
 		return array_merge( $settings, $iats_settings );
@@ -147,7 +158,7 @@ class Give_iATS_Gateway_Settings {
 	 */
 	function give_iats_admin_payment_js( $payment_id = 0 ) {
 		// Bailout.
-		if ( 'iatspayments' !== give_get_payment_gateway( $payment_id ) ) {
+		if ( 'iats' !== give_get_payment_gateway( $payment_id ) ) {
 			return;
 		}
 		?>
