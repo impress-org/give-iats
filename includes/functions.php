@@ -109,7 +109,7 @@ function give_iats_get_agent_credentials() {
 	$give_settings = give_get_settings();
 
 	// Test credentials.
-	$credentials   = array(
+	$credentials = array(
 		'code'     => $give_settings['iats_sandbox_agent_code'],
 		'password' => $give_settings['iats_sandbox_agent_password'],
 	);
@@ -123,5 +123,30 @@ function give_iats_get_agent_credentials() {
 	}
 
 	return $credentials;
+
+}
+
+
+/**
+ * @param $donation_data
+ *
+ * @return string
+ */
+function give_iats_format_expiration_date( $donation_data ) {
+
+	$month = isset( $donation_data['card_info']['card_exp_month'] ) ? $donation_data['card_info']['card_exp_month'] : '';
+	$year  = isset( $donation_data['card_info']['card_exp_year'] ) ? substr( $donation_data['card_info']['card_exp_year'], - 2 ) : '';
+
+	if ( empty( $month ) || empty( $year ) ) {
+		return false;
+	}
+
+	// No single digit months.
+	if ( 1 === strlen( $month ) ) {
+		$month = '0' . $month;
+	}
+
+
+	return trim( $month . '/' . $year );
 
 }
