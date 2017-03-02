@@ -52,6 +52,8 @@ final class Give_iATS_Gateway {
 	 * Give_iATS_Gateway constructor.
 	 */
 	private function __construct() {
+		// Run at a later priority than creating the instance.
+		add_action( 'init', array( $this, 'load_textdomain' ), 11 );
 	}
 
 
@@ -109,13 +111,14 @@ final class Give_iATS_Gateway {
 
 
 	/**
-	 * Setup hooks.
+	 * Setup hooks. CURRENTLY UNUSED.
 	 *
 	 * @since  1.0
 	 * @access public
 	 * @return Give_iATS_Gateway
 	 */
 	function setup_hooks() {
+
 		// Admin only scripts.
 		if ( ! is_admin() ) {
 			return self::$instance;
@@ -138,6 +141,41 @@ final class Give_iATS_Gateway {
 		if ( isset( $_GET['tab'] ) && 'gateways' === $_GET['tab'] ) {
 			wp_enqueue_script( 'iats-admin-settings', plugins_url( '/assets/js/admin/admin-settings.js', __FILE__ ), array( 'jquery' ) );
 		}
+	}
+
+	/**
+	 * Load the text domain.
+	 *
+	 * @access private
+	 * @since  1.0
+	 *
+	 * @return void
+	 */
+	public function load_textdomain() {
+
+		// Set filter for plugin's languages directory.
+		$give_iats_lang_dir = dirname( plugin_basename( __FILE__ ) ) . '/languages/';
+		$give_iats_lang_dir = apply_filters( 'give_iats_languages_directory', $give_iats_lang_dir );
+
+		// Traditional WordPress plugin locale filter.
+		$locale = apply_filters( 'plugin_locale', get_locale(), 'give-iats' );
+		$mofile = sprintf( '%1$s-%2$s.mo', 'give-iats', $locale );
+
+		// Setup paths to current locale file.
+		$mofile_local  = $give_iats_lang_dir . $mofile;
+		$mofile_global = WP_LANG_DIR . '/give-iats/' . $mofile;
+
+		if ( file_exists( $mofile_global ) ) {
+			// Look in global /wp-content/languages/give-iats folder.
+			load_textdomain( 'give-iats', $mofile_global );
+		} elseif ( file_exists( $mofile_local ) ) {
+			// Look in local /wp-content/plugins/give-iats/languages/ folder.
+			load_textdomain( 'give-iats', $mofile_local );
+		} else {
+			// Load the default language files.
+			load_plugin_textdomain( 'give-iats', false, $give_iats_lang_dir );
+		}
+
 	}
 }
 

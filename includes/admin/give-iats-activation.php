@@ -38,7 +38,7 @@ function give_iats_activation_banner() {
 			'file'              => __FILE__,
 			'name'              => __( 'iATS Gateway', 'give-iats' ),
 			'version'           => GIVE_IATS_VERSION,
-			'settings_url'      => admin_url( 'edit.php?post_type=give_forms&page=give-settings&tab=gateways&section=iats-settings' ),
+			'settings_url'      => admin_url( 'edit.php?post_type=give_forms&page=give-settings&tab=gateways&section=iats-payments' ),
 			'documentation_url' => 'http://docs.givewp.com/addon-iats',
 			'support_url'       => 'https://givewp.com/support/',
 			'testing'           => false, //Never leave as true!
@@ -68,7 +68,7 @@ function give_iats_plugin_action_links( $actions ) {
 	$new_actions = array(
 		'settings' => sprintf(
 			'<a href="%1$s">%2$s</a>',
-			admin_url( 'edit.php?post_type=give_forms&page=give-settings&tab=gateways&section=iats-settings' ),
+			admin_url( 'edit.php?post_type=give_forms&page=give-settings&tab=gateways&section=iats-payments' ),
 			esc_html__( 'Settings', 'give-iats' )
 		),
 	);
