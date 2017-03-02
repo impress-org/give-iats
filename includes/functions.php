@@ -1,26 +1,5 @@
 <?php
 /**
- * Check if iATS payment gateway active or not.
- *
- * @since 1.0
- * @return bool
- */
-function give_is_iats_active() {
-	$give_settings = give_get_settings();
-	$is_active     = false;
-
-	if (
-		array_key_exists( 'iatspayments', $give_settings['gateways'] )
-		&& ( 1 == $give_settings['gateways']['iatspayments'] )
-	) {
-		$is_active = true;
-	}
-
-	return $is_active;
-}
-
-
-/**
  * Get card name by card type
  *
  * Note: Only Limit credit card type supported by iATS payment gateway.
@@ -128,6 +107,8 @@ function give_iats_get_agent_credentials() {
 
 
 /**
+ * Format iATS expiration date.
+ * 
  * @param $donation_data
  *
  * @return string
@@ -150,3 +131,28 @@ function give_iats_format_expiration_date( $donation_data ) {
 	return trim( $month . '/' . $year );
 
 }
+
+
+/**
+ * Do not print cc field in donation form.
+ *
+ * Note: We do not need credit card field in donation form but we need billing detail fields.
+ *
+ * @since 1.0
+ *
+ * @param $form_id
+ *
+ * @return bool
+ */
+function give_iats_cc_form_callback( $form_id ) {
+
+	//Remove Address Fields if user has option enabled.
+	if ( ! give_is_setting_enabled(give_get_option( 'iats_billing_details' ) )) {
+		remove_action( 'give_after_cc_fields', 'give_default_cc_address_fields' );
+	}
+
+	//Ensure CC field is in place properly.
+	do_action( 'give_cc_form', $form_id );
+}
+
+add_action( 'give_iats_cc_form', 'give_iats_cc_form_callback' );
