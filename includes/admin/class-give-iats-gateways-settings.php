@@ -105,14 +105,14 @@ class Give_iATS_Gateway_Settings {
 				'type' => 'give_title',
 			),
 			array(
-				'name'    => esc_html__( 'Payment method label', 'give-iats' ),
+				'name'    => __( 'Payment method label', 'give-iats' ),
 				'id'      => 'iats_payment_method_label',
 				'type'    => 'text',
-				'default' => esc_html__( 'Credit Card', 'give-iats' ),
+				'default' => __( 'Credit Card', 'give-iats' ),
 				'desc'    => __( 'Payment method label will be appear on frontend.', 'give-iats' ),
 			),
 			array(
-				'name' => esc_html__( 'Live Agent Code', 'give-iats' ),
+				'name' => __( 'Live Agent Code', 'give-iats' ),
 				'id'   => 'iats_live_agent_code',
 				'type' => 'text',
 				'desc' => __( 'Required agent code provided by iATS.', 'give-iats' ),
@@ -120,11 +120,11 @@ class Give_iATS_Gateway_Settings {
 			array(
 				'name' => __( 'Live Agent Password', 'give-iats' ),
 				'id'   => 'iats_live_agent_password',
-				'type' => 'api_key',
-				'desc' => esc_html__( 'Required password provided by iATS.', 'give-iats' ),
+				'type' => 'api_keyF',
+				'desc' => __( 'Required password provided by iATS.', 'give-iats' ),
 			),
 			array(
-				'name' => esc_html__( 'Sandbox Agent Code', 'give-iats' ),
+				'name' => __( 'Sandbox Agent Code', 'give-iats' ),
 				'id'   => 'iats_sandbox_agent_code',
 				'type' => 'text',
 				'desc' => __( 'Required agent code provided by iATS.', 'give-iats' ),
@@ -133,7 +133,7 @@ class Give_iATS_Gateway_Settings {
 				'name' => __( 'Sandbox Agent Password', 'give-iats' ),
 				'id'   => 'iats_sandbox_agent_password',
 				'type' => 'api_key',
-				'desc' => esc_html__( 'Required password provided by iATS.', 'give-iats' ),
+				'desc' => __( 'Required password provided by iATS.', 'give-iats' ),
 			),
 		);
 
