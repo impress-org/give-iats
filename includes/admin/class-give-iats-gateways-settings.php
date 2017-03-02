@@ -120,7 +120,7 @@ class Give_iATS_Gateway_Settings {
 			array(
 				'name' => __( 'Live Agent Password', 'give-iats' ),
 				'id'   => 'iats_live_agent_password',
-				'type' => 'api_keyF',
+				'type' => 'api_key',
 				'desc' => __( 'Required password provided by iATS.', 'give-iats' ),
 			),
 			array(
