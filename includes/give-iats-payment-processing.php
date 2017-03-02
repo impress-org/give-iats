@@ -29,18 +29,22 @@ function give_process_iats_payment( $donation_data ) {
 		'cvv2'              => $donation_data['card_info']['card_cvc'],
 		'firstName'         => $donation_data['post_data']['give_first'],
 		'lastName'          => $donation_data['post_data']['give_last'],
-		'address'           => $donation_data['card_info']['card_address'],
-		'address2'          => $donation_data['card_info']['card_address_2'], // Custom data.
-		'city'              => $donation_data['card_info']['card_city'],
-		'state'             => $donation_data['post_data']['card_state'],
-		'country'           => $donation_data['post_data']['billing_country'],
-		'zipCode'           => $donation_data['post_data']['card_zip'],
 		'total'             => $donation_data['post_data']['give-amount'],
 		'comment'           => 'givewp',
 		'currency'          => give_get_currency(),
 		'mop'               => give_iats_get_card_name_by_type( $card['type'] ),
 		'customerIPAddress' => give_get_ip(),
 	);
+
+	// Pass address info if present.
+	if ( give_is_setting_enabled( give_get_option( 'iats_billing_details' ) ) ) {
+		$request['address']  = $donation_data['post_data']['card_address'];
+		$request['address2'] = $donation_data['post_data']['card_address_2'];
+		$request['city']     = $donation_data['post_data']['card_city'];
+		$request['state']    = $donation_data['post_data']['card_state'];
+		$request['country']  = $donation_data['post_data']['billing_country'];
+		$request['zipCode']  = $donation_data['post_data']['card_zip'];
+	}
 
 	// Make the API call using the ProcessLink service.
 	$response = $iATS_PL->processCreditCard( $request );
@@ -76,7 +80,7 @@ function give_process_iats_payment( $donation_data ) {
 		'currency'        => give_get_currency(),
 		'user_info'       => $donation_data['user_info'],
 		'status'          => 'pending',
-		'gateway'         => 'iatspayments',
+		'gateway'         => 'iats',
 	);
 
 	// Record the pending payment.
@@ -113,7 +117,7 @@ function give_process_iats_payment( $donation_data ) {
 	give_send_to_success_page();
 }
 
-add_action( 'give_gateway_iatspayments', 'give_process_iats_payment' );
+add_action( 'give_gateway_iats', 'give_process_iats_payment' );
 
 /**
  * Validate donation data for iATS payment gateways.
@@ -124,7 +128,7 @@ add_action( 'give_gateway_iatspayments', 'give_process_iats_payment' );
  */
 function give_iats_verify_donation_data( $donation_data ) {
 	// Bailout: Validation only for iats payment gateway.
-	if ( 'iatspayments' !== $donation_data['gateway'] ) {
+	if ( 'iats' !== $donation_data['gateway'] ) {
 		return;
 	}
 
@@ -159,12 +163,11 @@ function give_iats_donation_refund( $do_change, $donation_id, $new_status, $old_
 	// Bailout.
 	if (
 		'refunded' !== $new_status
-		|| 'iatspayments' !== $donation->gateway
+		|| 'iats' !== $donation->gateway
 		|| empty( $_POST['give_refund_in_iats'] )
 	) {
 		return $do_change;
 	}
-
 
 	// Get agent credentials.
 	$agent_credential = give_iats_get_agent_credentials();
@@ -203,16 +206,14 @@ function give_iats_donation_refund( $do_change, $donation_id, $new_status, $old_
 
 	}
 
-	// Add note to payment.
-	if ( isset( $request['TRANSACTIONID'] ) ) {
-		give_insert_payment_note( $donation->ID, sprintf( __( 'iATS transaction ID #%s successfully reversed in iATS.', 'give' ), $request['TRANSACTIONID'] ) );
+	// Add note to payment and store refund transaction id.
+	if ( isset( $response['TRANSACTIONID'] ) ) {
+		give_insert_payment_note( $donation->ID, sprintf( __( 'iATS transaction ID #%s successfully reversed in iATS.', 'give' ), $response['TRANSACTIONID'] ) );
+		give_update_payment_meta( $donation->ID, '_give_payment_refund_id', $response['TRANSACTIONID'] );
 	}
 
 	// Add iATS payment response meta.
 	update_post_meta( $donation->ID, 'iats_refund_response', $response );
-
-	// Add refund transaction id.
-	give_update_payment_meta( $donation->ID, '_give_payment_refund_id', $response['TRANSACTIONID'] );
 
 	return true;
 }
@@ -232,7 +233,7 @@ function give_iats_show_refund_transaction_id( $donation_id ) {
 	$donation = new Give_Payment( $donation_id );
 
 	// Bailout.
-	if ( 'refunded' !== $donation->status || 'iatspayments' !== $donation->gateway ) {
+	if ( 'refunded' !== $donation->status || 'iats' !== $donation->gateway ) {
 		return;
 	}
 
@@ -281,7 +282,6 @@ function give_iats_set_error( $api_response ) {
 		default:
 			$message = __( 'An error occurred while processing the donation. Please try again.', 'give-iats' );
 	}
-
 
 	give_set_error( 'iats_error', $message );
 
