@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: Give - iATS Gateway
+ * Plugin Name: Give - iATS Payment Solutions
  * Plugin URI: https://givewp.com
  * Description: Process online donations via the iATS payment gateway.
  * Author: WordImpress
@@ -258,7 +258,7 @@ function give_iats_min_version_notice() {
 function give_add_iats_licensing() {
 
 	if ( class_exists( 'Give_License' ) ) {
-		new Give_License( __FILE__, 'iATS Gateway', GIVE_IATS_VERSION, 'WordImpress' );
+		new Give_License( __FILE__, 'iATS Payment Solutions', GIVE_IATS_VERSION, 'WordImpress' );
 	}
 }
 
