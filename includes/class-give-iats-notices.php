@@ -121,7 +121,7 @@ class Give_iATS_Notices {
 		if ( $error_message = $this->get_reject_code( $error_code ) ) {
 
 			// Show error.
-			give_output_error( $error_message, true, "iats-error-{$error_code}" );
+			Give_Notices::print_frontend_notice( $error_message, true, "iats-error-{$error_code}" );
 		}
 	}
 
@@ -142,11 +142,11 @@ class Give_iATS_Notices {
 
 		if ( $error_message = $this->get_reject_code( $error_code ) ) {
 			?>
-            <div class="notice notice-error is-dismissible">
-                <p>
-                    <strong><?php _e( 'iATS donation refund error: ', 'give-iats' ); ?></strong><?php echo $error_message; ?>
-                </p>
-            </div>
+			<div class="notice notice-error is-dismissible">
+				<p>
+					<strong><?php _e( 'iATS donation refund error: ', 'give-iats' ); ?></strong><?php echo $error_message; ?>
+				</p>
+			</div>
 			<?php
 		}
 	}
