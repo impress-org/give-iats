@@ -3,7 +3,7 @@ Contributors: wordimpress
 Tags: donations, donation, ecommerce, e-commerce, fundraising, fundraiser, iats, gateway
 Requires at least: 4.2
 Tested up to: 4.7.2
-Stable tag: 1.0
+Stable tag: 1.0.1
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -37,6 +37,10 @@ The manual installation method involves downloading our donation plugin and uplo
 Automatic updates should work like a charm; as always though, ensure you backup your site just in case.
 
 == Changelog ==
+
+= 1.0.1 =
+* Fix: Resolved issue with large amounts being sent with thousands separator which iATS' API doesn't expect and therefore would incorrectly process.
+* Fix: PHP notice for using deprecated give_output_error() rather than Give_Notices().
 
 = 1.0 =
 * Initial plugin release. Yippee!

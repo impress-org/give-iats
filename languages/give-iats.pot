@@ -264,62 +264,62 @@ msgstr ""
 msgid "iATS donation refund error: "
 msgstr ""
 
-#: includes/give-iats-payment-processing.php:12
+#: includes/give-iats-payment-processing.php:14
 msgid "Nonce verification has failed."
 msgstr ""
 
-#: includes/give-iats-payment-processing.php:12
+#: includes/give-iats-payment-processing.php:14
 msgid "Error"
 msgstr ""
 
-#: includes/give-iats-payment-processing.php:55
+#: includes/give-iats-payment-processing.php:57
 msgid " Error"
 msgstr ""
 
-#: includes/give-iats-payment-processing.php:55
+#: includes/give-iats-payment-processing.php:57
 msgid "There was an error processing your donation payment. Error: %s"
 msgstr ""
 
-#: includes/give-iats-payment-processing.php:93
+#: includes/give-iats-payment-processing.php:95
 msgid "Payment Error"
 msgstr ""
 
-#: includes/give-iats-payment-processing.php:96
+#: includes/give-iats-payment-processing.php:98
 msgid "Payment creation failed before process iATS gateway. Payment data: %s"
 msgstr ""
 
-#: includes/give-iats-payment-processing.php:140
+#: includes/give-iats-payment-processing.php:144
 msgid "This card type is not supported. Please use another card for your donation."
 msgstr ""
 
-#: includes/give-iats-payment-processing.php:184
+#: includes/give-iats-payment-processing.php:188
 msgid "Refund for donation #%d"
 msgstr ""
 
-#: includes/give-iats-payment-processing.php:211
+#: includes/give-iats-payment-processing.php:215
 msgid "iATS transaction ID #%s successfully reversed in iATS."
 msgstr ""
 
-#: includes/give-iats-payment-processing.php:244
+#: includes/give-iats-payment-processing.php:248
 msgid "Refund ID:"
 msgstr ""
 
-#: includes/give-iats-payment-processing.php:268
+#: includes/give-iats-payment-processing.php:272
 msgid "The card number provided is not valid. Please try your donation again with a valid card number."
 msgstr ""
 
-#: includes/give-iats-payment-processing.php:271
+#: includes/give-iats-payment-processing.php:275
 msgid "The CVV2 code security code is incorrect. Please try your donation again with a valid CVV2 number."
 msgstr ""
 
-#: includes/give-iats-payment-processing.php:274
+#: includes/give-iats-payment-processing.php:278
 msgid "The card expiration date is incorrect. Please try your donation again with a valid card expiration date."
 msgstr ""
 
-#: includes/give-iats-payment-processing.php:277
+#: includes/give-iats-payment-processing.php:281
 msgid "The payment gateway is having trouble processing donations at the moment. Please try again later."
 msgstr ""
 
-#: includes/give-iats-payment-processing.php:283
+#: includes/give-iats-payment-processing.php:287
 msgid "An error occurred while processing the donation. Please try again."
 msgstr ""
