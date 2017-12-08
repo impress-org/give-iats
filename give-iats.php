@@ -65,8 +65,8 @@ final class Give_iATS_Gateway {
 	 * @return Give_iATS_Gateway
 	 */
 	static function get_instance() {
-		if ( null === self::$instance ) {
-			self::$instance = new static();
+		if ( is_null( self::$instance ) ) {
+			self::$instance = new self();
 		}
 
 		return self::$instance;
@@ -208,6 +208,7 @@ function give_iats_check_environment() {
 	if ( current_user_can( 'activate_plugins' ) && ! $is_give_active ) {
 		add_action( 'admin_notices', 'give_iats_activation_notice' );
 		add_action( 'admin_init', 'give_iats_deactivate_self' );
+
 		return false;
 	}
 
@@ -215,6 +216,7 @@ function give_iats_check_environment() {
 	if ( defined( 'GIVE_VERSION' ) && version_compare( GIVE_VERSION, GIVE_IATS_MIN_GIVE_VERSION, '<' ) ) {
 		add_action( 'admin_notices', 'give_iats_min_version_notice' );
 		add_action( 'admin_init', 'give_iats_deactivate_self' );
+
 		return false;
 	}
 
