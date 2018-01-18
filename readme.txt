@@ -1,9 +1,9 @@
 === Give - iATS Gateway ===
 Contributors: wordimpress
 Tags: donations, donation, ecommerce, e-commerce, fundraising, fundraiser, iats, gateway
-Requires at least: 4.5
+Requires at least: 4.8
 Tested up to: 4.9
-Stable tag: 1.0.1
+Stable tag: 1.0.2
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -37,6 +37,10 @@ The manual installation method involves downloading our donation plugin and uplo
 Automatic updates should work like a charm; as always though, ensure you backup your site just in case.
 
 == Changelog ==
+
+= 1.0.2 =
+* Fix: Compatiblity with Fee Recovery so that the proper amount with fees is sent to the gateway.
+* Fix: iATS requires two decimal places. When this gateway is active it forces two decimal places for donation amounts.
 
 = 1.0.1 =
 * Fix: Resolved issue with large amounts being sent with thousands separator which iATS' API doesn't expect and therefore would incorrectly process.

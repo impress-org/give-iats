@@ -5,7 +5,7 @@
  * Description: Process online donations via the iATS payment gateway.
  * Author: WordImpress
  * Author URI: https://wordimpress.com
- * Version: 1.0.1
+ * Version: 1.0.2
  * Text Domain: give-iats
  * Domain Path: /languages
  * GitHub Plugin URI: https://github.com/WordImpress/Give-iATS
@@ -13,22 +13,22 @@
 
 // iATS Constants.
 if ( ! defined( 'GIVE_IATS_VERSION' ) ) {
-	define( 'GIVE_IATS_VERSION', '1.0.1' );
+	define( 'GIVE_IATS_VERSION', '1.0.2' );
 }
 if ( ! defined( 'GIVE_IATS_MIN_GIVE_VERSION' ) ) {
-	define( 'GIVE_IATS_MIN_GIVE_VERSION', '1.8.12' );
+	define( 'GIVE_IATS_MIN_GIVE_VERSION', '1.8.19' );
 }
 if ( ! defined( 'GIVE_IATS_PLUGIN_FILE' ) ) {
 	define( 'GIVE_IATS_PLUGIN_FILE', __FILE__ );
 }
 if ( ! defined( 'GIVE_IATS_PLUGIN_DIR' ) ) {
-	define( 'GIVE_IATS_PLUGIN_DIR', dirname( __FILE__ ) );
+	define( 'GIVE_IATS_PLUGIN_DIR', dirname( GIVE_IATS_PLUGIN_FILE ) );
 }
 if ( ! defined( 'GIVE_IATS_PLUGIN_URL' ) ) {
-	define( 'GIVE_IATS_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
+	define( 'GIVE_IATS_PLUGIN_URL', plugin_dir_url( GIVE_IATS_PLUGIN_FILE ) );
 }
 if ( ! defined( 'GIVE_IATS_BASENAME' ) ) {
-	define( 'GIVE_IATS_BASENAME', plugin_basename( __FILE__ ) );
+	define( 'GIVE_IATS_BASENAME', plugin_basename( GIVE_IATS_PLUGIN_FILE ) );
 }
 
 /**
@@ -139,7 +139,7 @@ final class Give_iATS_Gateway {
 	 */
 	public function enqueue_scripts( $hook ) {
 		if ( isset( $_GET['tab'] ) && 'gateways' === $_GET['tab'] ) {
-			wp_enqueue_script( 'iats-admin-settings', plugins_url( '/assets/js/admin/admin-settings.js', __FILE__ ), array( 'jquery' ) );
+			wp_enqueue_script( 'iats-admin-settings', plugins_url( '/assets/js/admin/admin-settings.js', GIVE_IATS_PLUGIN_FILE ), array( 'jquery' ) );
 		}
 	}
 
@@ -154,7 +154,7 @@ final class Give_iATS_Gateway {
 	public function load_textdomain() {
 
 		// Set filter for plugin's languages directory.
-		$give_iats_lang_dir = dirname( plugin_basename( __FILE__ ) ) . '/languages/';
+		$give_iats_lang_dir = dirname( plugin_basename( GIVE_IATS_PLUGIN_FILE ) ) . '/languages/';
 		$give_iats_lang_dir = apply_filters( 'give_iats_languages_directory', $give_iats_lang_dir );
 
 		// Traditional WordPress plugin locale filter.
@@ -260,7 +260,7 @@ function give_iats_min_version_notice() {
 function give_add_iats_licensing() {
 
 	if ( class_exists( 'Give_License' ) ) {
-		new Give_License( __FILE__, 'iATS Payment Solutions', GIVE_IATS_VERSION, 'WordImpress' );
+		new Give_License( GIVE_IATS_PLUGIN_FILE, 'iATS Payment Solutions', GIVE_IATS_VERSION, 'WordImpress' );
 	}
 }
 
