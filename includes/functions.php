@@ -156,3 +156,46 @@ function give_iats_cc_form_callback( $form_id ) {
 }
 
 add_action( 'give_iats_cc_form', 'give_iats_cc_form_callback' );
+
+/**
+ * Override number of decimals settings.
+ *
+ * @since 1.0.2
+ *
+ * @param integer $number_decimals Number of decimals.
+ *
+ * @return int
+ */
+function give_iats_scripts_vars( $number_decimals ) {
+
+	if ( give_is_gateway_active( 'iats' ) ) {
+		$number_decimals = 2;
+	}
+
+	return apply_filters( 'give_iats_number_decimals', $number_decimals );
+}
+
+add_filter( 'give_sanitize_amount_decimals', 'give_iats_scripts_vars', 20, 1 );
+
+
+/**
+ * Override number of decimals from the Form HTML tags.
+ *
+ * @since 1.0.2
+ *
+ * @param array  $form_html_tags
+ * @param object $form
+ *
+ * @return mixed
+ */
+function give_form_add_iats_settings( $form_html_tags, $form ) {
+
+	// Set Number of decimal 2 forcefully if iATS gateway enabled.
+	if ( give_is_gateway_active( 'iats' ) ) {
+		$form_html_tags['data-number_decimals'] = 2;
+	}
+
+	return apply_filters( 'give_iats_form_html_tags', $form_html_tags );
+}
+
+add_filter( 'give_form_html_tags', 'give_form_add_iats_settings', 0, 2 );
