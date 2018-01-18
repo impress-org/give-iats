@@ -31,7 +31,7 @@ function give_process_iats_payment( $donation_data ) {
 		'cvv2'              => $donation_data['card_info']['card_cvc'],
 		'firstName'         => $donation_data['post_data']['give_first'],
 		'lastName'          => $donation_data['post_data']['give_last'],
-		'total'             => give_sanitize_amount( $donation_data['post_data']['give-amount'], give_get_price_decimals()),
+		'total'             => give_sanitize_amount( $donation_data['price'], give_get_price_decimals()),
 		'comment'           => 'givewp',
 		'currency'          => give_get_currency(),
 		'mop'               => give_iats_get_card_name_by_type( $card['type'] ),
