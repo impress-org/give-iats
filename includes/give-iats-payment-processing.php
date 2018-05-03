@@ -253,7 +253,7 @@ function give_iats_show_refund_transaction_id( $donation_id ) {
 	endif;
 }
 
-add_action( 'give_view_order_details_payment_meta_after', 'give_iats_show_refund_transaction_id' );
+add_action( 'give_view_donation_details_payment_meta_after', 'give_iats_show_refund_transaction_id' );
 
 /**
  * Display error to the user according to the error codes from iATS.

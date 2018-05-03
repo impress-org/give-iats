@@ -57,7 +57,7 @@ class Give_iATS_Gateway_Settings {
 		add_filter( 'give_settings_gateways', array( $this, 'add_settings' ), 99999 );
 
 		// Add setting to donation edit screen.
-		add_action( 'give_view_order_details_before', array( $this, 'give_iats_admin_payment_js' ), 100 );
+		add_action( 'give_view_donation_details_before', array( $this, 'give_iats_admin_payment_js' ), 100 );
 	}
 
 	/**
