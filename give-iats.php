@@ -5,7 +5,7 @@
  * Description: Process online donations via the iATS payment gateway.
  * Author: WordImpress
  * Author URI: https://wordimpress.com
- * Version: 1.0.2
+ * Version: 1.0.3
  * Text Domain: give-iats
  * Domain Path: /languages
  * GitHub Plugin URI: https://github.com/WordImpress/Give-iATS
@@ -13,7 +13,7 @@
 
 // iATS Constants.
 if ( ! defined( 'GIVE_IATS_VERSION' ) ) {
-	define( 'GIVE_IATS_VERSION', '1.0.2' );
+	define( 'GIVE_IATS_VERSION', '1.0.3' );
 }
 if ( ! defined( 'GIVE_IATS_MIN_GIVE_VERSION' ) ) {
 	define( 'GIVE_IATS_MIN_GIVE_VERSION', '1.8.19' );

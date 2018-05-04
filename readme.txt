@@ -3,7 +3,7 @@ Contributors: wordimpress
 Tags: donations, donation, ecommerce, e-commerce, fundraising, fundraiser, iats, gateway
 Requires at least: 4.8
 Tested up to: 4.9
-Stable tag: 1.0.2
+Stable tag: 1.0.3
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -37,6 +37,9 @@ The manual installation method involves downloading our donation plugin and uplo
 Automatic updates should work like a charm; as always though, ensure you backup your site just in case.
 
 == Changelog ==
+
+= 1.0.3: May 3rd, 2018 =
+* Tweak: Updated deprecated hooks within Give 2.1+ - Please update to the latest Give core!
 
 = 1.0.2 =
 * Fix: Compatiblity with Fee Recovery so that the proper amount with fees is sent to the gateway.
