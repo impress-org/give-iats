@@ -84,27 +84,27 @@ final class Give_iATS_Gateway {
 
 		if ( is_admin() ) {
 			// Add actions.
-			require_once 'includes/admin/give-iats-activation.php';
-			require_once 'includes/admin/give-iats-actions.php';
+			require_once GIVE_IATS_PLUGIN_DIR . '/includes/admin/give-iats-activation.php';
+			require_once GIVE_IATS_PLUGIN_DIR . '/includes/admin/give-iats-actions.php';
 		}
 
 		// iATS payment gateways core.
-		require_once 'includes/lib/iATSPayments/iATS.php';
+		require_once GIVE_IATS_PLUGIN_DIR . '/includes/lib/iATSPayments/iATS.php';
 
 		// Credit card validator core.
-		require_once 'includes/lib/php-credit-card-validator/src/CreditCard.php';
+		require_once GIVE_IATS_PLUGIN_DIR . '/includes/lib/php-credit-card-validator/src/CreditCard.php';
 
 		// Load helper functions.
-		require_once 'includes/functions.php';
+		require_once GIVE_IATS_PLUGIN_DIR . '/includes/functions.php';
 
 		// Add error notice if any.
-		require_once 'includes/class-give-iats-notices.php';
+		require_once GIVE_IATS_PLUGIN_DIR . '/includes/class-give-iats-notices.php';
 
 		// Load plugin settings.
-		require_once 'includes/admin/class-give-iats-gateways-settings.php';
+		require_once GIVE_IATS_PLUGIN_DIR . '/includes/admin/class-give-iats-gateways-settings.php';
 
 		// Process payments.
-		require_once 'includes/give-iats-payment-processing.php';
+		require_once GIVE_IATS_PLUGIN_DIR . '/includes/give-iats-payment-processing.php';
 
 		return self::$instance;
 	}
