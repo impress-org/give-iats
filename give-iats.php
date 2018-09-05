@@ -81,7 +81,7 @@ final class Give_iATS_Gateway {
 	}
 
 	/**
-	 * Setup Give Mollie.
+	 * Setup Give iATS Gateway.
 	 *
 	 * @since  1.0.4
 	 * @access private
@@ -311,7 +311,7 @@ final class Give_iATS_Gateway {
 	}
 
 	/**
-	 * Implement Give Licensing for Give Mollie Add On.
+	 * Implement Give Licensing for Give iATS Gateway Add On.
 	 *
 	 * @since  1.0.4
 	 * @access private
