@@ -45,6 +45,14 @@ final class Give_iATS_Gateway {
 	 */
 	static private $instance;
 
+	/**
+	 * Notices (array)
+	 *
+	 * @since 1.0.4
+	 *
+	 * @var array
+	 */
+	public $notices = array();
 
 	/**
 	 * Singleton pattern.
@@ -56,7 +64,6 @@ final class Give_iATS_Gateway {
 		add_action( 'init', array( $this, 'load_textdomain' ), 11 );
 	}
 
-
 	/**
 	 * Get instance.
 	 *
@@ -67,11 +74,25 @@ final class Give_iATS_Gateway {
 	static function get_instance() {
 		if ( is_null( self::$instance ) ) {
 			self::$instance = new self();
+			self::$instance->setup();
 		}
 
 		return self::$instance;
 	}
 
+	/**
+	 * Setup Give iATS Gateway.
+	 *
+	 * @since  1.0.4
+	 * @access private
+	 */
+	private function setup() {
+
+		// Give init hook.
+		add_action( 'give_init', array( $this, 'init' ), 10 );
+		add_action( 'admin_init', array( $this, 'check_environment' ), 999 );
+		add_action( 'admin_notices', array( $this, 'admin_notices' ), 15 );
+	}
 
 	/**
 	 * Load files.
@@ -80,7 +101,14 @@ final class Give_iATS_Gateway {
 	 * @access public
 	 * @return Give_iATS_Gateway
 	 */
-	public function load_files() {
+	public function init() {
+
+		if ( ! $this->get_environment_warning() ) {
+			return;
+		}
+
+		$this->licensing();
+		$this->activation_banner();
 
 		if ( is_admin() ) {
 			// Add actions.
@@ -177,91 +205,170 @@ final class Give_iATS_Gateway {
 		}
 
 	}
-}
 
-/**
- * Initialize the plugin
- */
-function give_iats_plugin_init() {
-	// We need Give to continue.
-	if ( give_iats_check_environment() ) {
-		Give_iATS_Gateway::get_instance()->load_files();
+	/**
+	 * Check plugin environment.
+	 *
+	 * @since  1.0.4
+	 * @access public
+	 *
+	 * @return bool
+	 */
+	public function check_environment() {
+		// Flag to check whether plugin file is loaded or not.
+		$is_working = true;
+
+		// Load plugin helper functions.
+		if ( ! function_exists( 'is_plugin_active' ) ) {
+			require_once ABSPATH . '/wp-admin/includes/plugin.php';
+		}
+
+		/* Check to see if Give is activated, if it isn't deactivate and show a banner. */
+		// Check for if give plugin activate or not.
+		$is_give_active = defined( 'GIVE_PLUGIN_BASENAME' ) ? is_plugin_active( GIVE_PLUGIN_BASENAME ) : false;
+
+		if ( empty( $is_give_active ) ) {
+			// Show admin notice.
+			$this->add_admin_notice( 'prompt_give_activate', 'error', sprintf( __( '<strong>Activation Error:</strong> You must have the <a href="%s" target="_blank">Give</a> plugin installed and activated for Give - iATS to activate.', 'give-iats' ), 'https://givewp.com' ) );
+			$is_working = false;
+		}
+
+		return $is_working;
+	}
+
+	/**
+	 * Check plugin for Give environment.
+	 *
+	 * @since  1.0.4
+	 * @access public
+	 *
+	 * @return bool
+	 */
+	public function get_environment_warning() {
+		// Flag to check whether plugin file is loaded or not.
+		$is_working = true;
+
+		// Verify dependency cases.
+		if (
+			defined( 'GIVE_VERSION' )
+			&& version_compare( GIVE_VERSION, GIVE_IATS_MIN_GIVE_VERSION, '<' )
+		) {
+
+			/* Min. Give. plugin version. */
+			// Show admin notice.
+			$this->add_admin_notice( 'prompt_give_incompatible', 'error', sprintf( __( '<strong>Activation Error:</strong> You must have the <a href="%s" target="_blank">Give</a> core version %s for the Give - iATS add-on to activate.', 'give-iats' ), 'https://givewp.com', GIVE_IATS_MIN_GIVE_VERSION ) );
+
+			$is_working = false;
+		}
+
+		return $is_working;
+	}
+
+	/**
+	 * Allow this class and other classes to add notices.
+	 *
+	 * @since 1.0.4
+	 *
+	 * @param $slug
+	 * @param $class
+	 * @param $message
+	 */
+	public function add_admin_notice( $slug, $class, $message ) {
+		$this->notices[ $slug ] = array(
+			'class'   => $class,
+			'message' => $message,
+		);
+	}
+
+	/**
+	 * Display admin notices.
+	 *
+	 * @since 1.0.4
+	 */
+	public function admin_notices() {
+
+		$allowed_tags = array(
+			'a'      => array(
+				'href'  => array(),
+				'title' => array(),
+				'class' => array(),
+				'id'    => array(),
+			),
+			'br'     => array(),
+			'em'     => array(),
+			'span'   => array(
+				'class' => array(),
+			),
+			'strong' => array(),
+		);
+
+		foreach ( (array) $this->notices as $notice_key => $notice ) {
+			echo "<div class='" . esc_attr( $notice['class'] ) . "'><p>";
+			echo wp_kses( $notice['message'], $allowed_tags );
+			echo '</p></div>';
+		}
+
+	}
+
+	/**
+	 * Implement Give Licensing for Give iATS Gateway Add On.
+	 *
+	 * @since  1.0.4
+	 * @access private
+	 */
+	private function licensing() {
+		if ( class_exists( 'Give_License' ) ) {
+			new Give_License( GIVE_IATS_PLUGIN_FILE, 'iATS Payment Solutions', GIVE_IATS_VERSION, 'WordImpress' );
+		}
+	}
+
+	/**
+	 * Give iATS Activation Banner
+	 *
+	 * Includes and initializes Give activation banner class.
+	 *
+	 * @since 1.0.4
+	 */
+	function activation_banner() {
+
+		// Check for activation banner inclusion.
+		if ( ! class_exists( 'Give_Addon_Activation_Banner' )
+		     && file_exists( GIVE_PLUGIN_DIR . 'includes/admin/class-addon-activation-banner.php' )
+		) {
+
+			include GIVE_PLUGIN_DIR . 'includes/admin/class-addon-activation-banner.php';
+		}
+
+		// Initialize activation welcome banner.
+		if ( class_exists( 'Give_Addon_Activation_Banner' ) ) {
+
+			// Only runs on admin
+			$args = array(
+				'file'              => __FILE__,
+				'name'              => __( 'iATS Gateway', 'give-iats' ),
+				'version'           => GIVE_IATS_VERSION,
+				'settings_url'      => admin_url( 'edit.php?post_type=give_forms&page=give-settings&tab=gateways&section=iats-payments' ),
+				'documentation_url' => 'http://docs.givewp.com/addon-iats',
+				'support_url'       => 'https://givewp.com/support/',
+				'testing'           => false, //Never leave as true!
+			);
+
+			new Give_Addon_Activation_Banner( $args );
+
+		}
+
 	}
 }
 
-add_action( 'init', 'give_iats_plugin_init' );
-
-
 /**
- * Check the environment before starting up.
+ * Class instance of Give_iATS_Gateway
  *
- * @since 1.0
+ * @since 1.0.4
  *
- * @return bool
+ * @return Give_iATS_Gateway
  */
-function give_iats_check_environment() {
-
-	// Check for if give plugin activate or not.
-	$is_give_active = defined( 'GIVE_PLUGIN_BASENAME' ) ? true : false;
-
-	// Check to see if Give is activated, if it isn't deactivate and show a banner
-	if ( current_user_can( 'activate_plugins' ) && ! $is_give_active ) {
-		add_action( 'admin_notices', 'give_iats_activation_notice' );
-		add_action( 'admin_init', 'give_iats_deactivate_self' );
-
-		return false;
-	}
-
-	// Check minimum Give version.
-	if ( defined( 'GIVE_VERSION' ) && version_compare( GIVE_VERSION, GIVE_IATS_MIN_GIVE_VERSION, '<' ) ) {
-		add_action( 'admin_notices', 'give_iats_min_version_notice' );
-		add_action( 'admin_init', 'give_iats_deactivate_self' );
-
-		return false;
-	}
-
-	return true;
-
+function Give_iATS_Gateway() {
+	return Give_iATS_Gateway::get_instance();
 }
 
-/**
- * Deactivate self. Must be hooked with admin_init.
- *
- * Currently hooked via give_iats_check_environment()
- */
-function give_iats_deactivate_self() {
-	deactivate_plugins( GIVE_IATS_BASENAME );
-	if ( isset( $_GET['activate'] ) ) {
-		unset( $_GET['activate'] );
-	}
-}
-
-/**
- * Notice for no Give core deactivated.
- *
- * @since 1.0
- */
-function give_iats_activation_notice() {
-	echo '<div class="error"><p>' . __( '<strong>Activation Error:</strong> You must have the <a href="https://givewp.com/" target="_blank">Give</a> plugin installed and activated for the iATS add-on to activate.', 'give-iats' ) . '</p></div>';
-}
-
-/**
- * Notice for min-version not met.
- *
- * @since 1.0
- */
-function give_iats_min_version_notice() {
-	echo '<div class="error"><p>' . sprintf( __( '<strong>Activation Error:</strong> You must have <a href="%1$s" target="_blank">Give</a> version %2$s+ for the iATS add-on to activate.', 'give-iats' ), 'https://givewp.com', GIVE_IATS_MIN_GIVE_VERSION ) . '</p></div>';
-}
-
-/**
- * Give - iATS Add-on Licensing
- */
-function give_add_iats_licensing() {
-
-	if ( class_exists( 'Give_License' ) ) {
-		new Give_License( GIVE_IATS_PLUGIN_FILE, 'iATS Payment Solutions', GIVE_IATS_VERSION, 'WordImpress' );
-	}
-}
-
-add_action( 'plugins_loaded', 'give_add_iats_licensing' );
+Give_iATS_Gateway();
