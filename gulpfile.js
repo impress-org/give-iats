@@ -22,7 +22,7 @@ gulp.task('pot', function () {
             destFile: 'give-iats.pot',
             bugReport: 'https://github.com/WordImpress/Give-iATS/issues/new',
             lastTranslator: '',
-            team: 'WordImpress <info@wordimpress.com>'
+            team: 'GiveWP <info@givewp.com>'
         }))
         .pipe(gulp.dest('languages'));
 });

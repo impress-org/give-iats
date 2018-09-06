@@ -1,5 +1,5 @@
 === Give - iATS Gateway ===
-Contributors: wordimpress
+Contributors: givewp
 Tags: donations, donation, ecommerce, e-commerce, fundraising, fundraiser, iats, gateway
 Requires at least: 4.8
 Tested up to: 4.9

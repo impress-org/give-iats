@@ -31,7 +31,7 @@ function give_process_iats_payment( $donation_data ) {
 		'cvv2'              => $donation_data['card_info']['card_cvc'],
 		'firstName'         => $donation_data['post_data']['give_first'],
 		'lastName'          => $donation_data['post_data']['give_last'],
-		'total'             => give_sanitize_amount( $donation_data['price'], give_get_price_decimals()),
+		'total'             => give_sanitize_amount( $donation_data['price'], give_get_price_decimals() ),
 		'comment'           => 'givewp',
 		'currency'          => give_get_currency(),
 		'mop'               => give_iats_get_card_name_by_type( $card['type'] ),
@@ -59,10 +59,12 @@ function give_process_iats_payment( $donation_data ) {
 		give_iats_set_error( $response );
 
 		// Redirect back to donation form.
-		give_send_back_to_checkout( array(
-			'payment-mode'      => $donation_data['post_data']['give-gateway'],
-			'give-iats-message' => isset( $response['code'] ) ? $response['code'] : '',
-		) );
+		give_send_back_to_checkout(
+			array(
+				'payment-mode'      => $donation_data['post_data']['give-gateway'],
+				'give-iats-message' => isset( $response['code'] ) ? $response['code'] : '',
+			)
+		);
 
 		return false;
 	}
@@ -243,12 +245,12 @@ function give_iats_show_refund_transaction_id( $donation_id ) {
 
 	if ( $refund_id = give_get_payment_meta( $donation_id, '_give_payment_refund_id', true ) ) :
 		?>
-        <div class="give-admin-box-inside">
-            <p>
-                <strong><?php esc_html_e( 'Refund ID:', 'give-iats' ); ?></strong>&nbsp;
+		<div class="give-admin-box-inside">
+			<p>
+				<strong><?php esc_html_e( 'Refund ID:', 'give-iats' ); ?></strong>&nbsp;
 				<?php echo $refund_id; ?>
-            </p>
-        </div>
+			</p>
+		</div>
 		<?php
 	endif;
 }

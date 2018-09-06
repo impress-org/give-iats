@@ -3,8 +3,8 @@
  * Plugin Name: Give - iATS Payment Solutions
  * Plugin URI: https://givewp.com
  * Description: Process online donations via the iATS payment gateway.
- * Author: WordImpress
- * Author URI: https://wordimpress.com
+ * Author: GiveWP
+ * Author URI: https://givewp.com
  * Version: 1.0.3
  * Text Domain: give-iats
  * Domain Path: /languages
@@ -16,7 +16,7 @@ if ( ! defined( 'GIVE_IATS_VERSION' ) ) {
 	define( 'GIVE_IATS_VERSION', '1.0.3' );
 }
 if ( ! defined( 'GIVE_IATS_MIN_GIVE_VERSION' ) ) {
-	define( 'GIVE_IATS_MIN_GIVE_VERSION', '1.8.19' );
+	define( 'GIVE_IATS_MIN_GIVE_VERSION', '2.2.0' );
 }
 if ( ! defined( 'GIVE_IATS_PLUGIN_FILE' ) ) {
 	define( 'GIVE_IATS_PLUGIN_FILE', __FILE__ );
@@ -112,8 +112,8 @@ final class Give_iATS_Gateway {
 
 		if ( is_admin() ) {
 			// Add actions.
-			require_once GIVE_IATS_PLUGIN_DIR . '/includes/admin/give-iats-activation.php';
-			require_once GIVE_IATS_PLUGIN_DIR . '/includes/admin/give-iats-actions.php';
+			require_once GIVE_IATS_PLUGIN_DIR . '/includes/admin/plugins-list.php';
+			require_once GIVE_IATS_PLUGIN_DIR . '/includes/admin/admin-actions.php';
 		}
 
 		// iATS payment gateways core.
@@ -132,7 +132,7 @@ final class Give_iATS_Gateway {
 		require_once GIVE_IATS_PLUGIN_DIR . '/includes/admin/class-give-iats-gateways-settings.php';
 
 		// Process payments.
-		require_once GIVE_IATS_PLUGIN_DIR . '/includes/give-iats-payment-processing.php';
+		require_once GIVE_IATS_PLUGIN_DIR . '/includes/payment-processing.php';
 
 		return self::$instance;
 	}

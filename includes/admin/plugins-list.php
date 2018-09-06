@@ -3,7 +3,7 @@
  * Give Authorize.net Gateway Activation.
  *
  * @package     Give
- * @copyright   Copyright (c) 2017, WordImpress
+ * @copyright   Copyright (c) 2017, GiveWP
  * @license     https://opensource.org/licenses/gpl-license GNU Public License
  * @since       1.0
  */
@@ -56,21 +56,27 @@ function give_iats_plugin_row_meta( $plugin_meta, $plugin_file ) {
 	$new_meta_links = array(
 		sprintf(
 			'<a href="%1$s" target="_blank">%2$s</a>',
-			esc_url( add_query_arg( array(
-					'utm_source'   => 'plugins-page',
-					'utm_medium'   => 'plugin-row',
-					'utm_campaign' => 'admin',
-				), 'http://docs.givewp.com/addon-iats' )
+			esc_url(
+				add_query_arg(
+					array(
+						'utm_source'   => 'plugins-page',
+						'utm_medium'   => 'plugin-row',
+						'utm_campaign' => 'admin',
+					), 'http://docs.givewp.com/addon-iats'
+				)
 			),
 			esc_html__( 'Documentation', 'give-iats' )
 		),
 		sprintf(
 			'<a href="%1$s" target="_blank">%2$s</a>',
-			esc_url( add_query_arg( array(
-					'utm_source'   => 'plugins-page',
-					'utm_medium'   => 'plugin-row',
-					'utm_campaign' => 'admin',
-				), 'https://givewp.com/addons/' )
+			esc_url(
+				add_query_arg(
+					array(
+						'utm_source'   => 'plugins-page',
+						'utm_medium'   => 'plugin-row',
+						'utm_campaign' => 'admin',
+					), 'https://givewp.com/addons/'
+				)
 			),
 			esc_html__( 'Add-ons', 'give-iats' )
 		),
