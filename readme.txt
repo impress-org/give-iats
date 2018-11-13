@@ -3,7 +3,8 @@ Contributors: givewp
 Tags: donations, donation, ecommerce, e-commerce, fundraising, fundraiser, iats, gateway
 Requires at least: 4.8
 Tested up to: 4.9
-Stable tag: 1.0.3
+Stable tag: 1.0.4
+Requires Give: 2.3.0
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -17,7 +18,7 @@ This plugin requires the Give plugin activated to function properly. When activa
 
 = Minimum Requirements =
 
-* WordPress 4.2 or greater
+* WordPress 4.8 or greater
 * PHP version 5.3 or greater
 * MySQL version 5.0 or greater
 * Some payment gateways require fsockopen support (for IPN access)
@@ -37,6 +38,10 @@ The manual installation method involves downloading our donation plugin and uplo
 Automatic updates should work like a charm; as always though, ensure you backup your site just in case.
 
 == Changelog ==
+
+= 1.0.4: November 13th, 2018 =
+* Tweak: Optimized how the plugin is activated to depend on Give Core and prevent potential activation issues when requirements not met.
+* Fix: Link to documentation updated so it doesn't go to 404.
 
 = 1.0.3: May 3rd, 2018 =
 * Tweak: Updated deprecated hooks within Give 2.1+ - Please update to the latest Give core!

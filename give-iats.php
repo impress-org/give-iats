@@ -5,18 +5,18 @@
  * Description: Process online donations via the iATS payment gateway.
  * Author: GiveWP
  * Author URI: https://givewp.com
- * Version: 1.0.3
+ * Version: 1.0.4
  * Text Domain: give-iats
  * Domain Path: /languages
- * GitHub Plugin URI: https://github.com/WordImpress/Give-iATS
+ * GitHub Plugin URI: https://github.com/impress-org/give-iats
  */
 
 // iATS Constants.
 if ( ! defined( 'GIVE_IATS_VERSION' ) ) {
-	define( 'GIVE_IATS_VERSION', '1.0.3' );
+	define( 'GIVE_IATS_VERSION', '1.0.4' );
 }
 if ( ! defined( 'GIVE_IATS_MIN_GIVE_VERSION' ) ) {
-	define( 'GIVE_IATS_MIN_GIVE_VERSION', '2.2.0' );
+	define( 'GIVE_IATS_MIN_GIVE_VERSION', '2.3.0' );
 }
 if ( ! defined( 'GIVE_IATS_PLUGIN_FILE' ) ) {
 	define( 'GIVE_IATS_PLUGIN_FILE', __FILE__ );
@@ -344,7 +344,7 @@ final class Give_iATS_Gateway {
 
 			// Only runs on admin
 			$args = array(
-				'file'              => __FILE__,
+				'file'              => GIVE_IATS_PLUGIN_FILE,
 				'name'              => __( 'iATS Gateway', 'give-iats' ),
 				'version'           => GIVE_IATS_VERSION,
 				'settings_url'      => admin_url( 'edit.php?post_type=give_forms&page=give-settings&tab=gateways&section=iats-payments' ),

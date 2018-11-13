@@ -20,7 +20,7 @@ gulp.task('pot', function () {
             package: 'Give-iATS',
             domain: 'give-iats', //textdomain
             destFile: 'give-iats.pot',
-            bugReport: 'https://github.com/WordImpress/Give-iATS/issues/new',
+            bugReport: 'https://github.com/impress-org/give-iats/issues/new',
             lastTranslator: '',
             team: 'GiveWP <info@givewp.com>'
         }))
