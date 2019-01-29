@@ -49,7 +49,7 @@ msgid "Credit Card"
 msgstr ""
 
 #: includes/admin/class-give-iats-gateways-settings.php:112
-msgid "Payment method label will be appear on frontend."
+msgid "Payment method label will appear on the frontend."
 msgstr ""
 
 #: includes/admin/class-give-iats-gateways-settings.php:115
