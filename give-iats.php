@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: Give - iATS Payment Solutions
- * Plugin URI: https://givewp.com
+ * Plugin URI: https://givewp.com/addons/iats-gateway/
  * Description: Process online donations via the iATS payment gateway.
  * Author: GiveWP
  * Author URI: https://givewp.com
