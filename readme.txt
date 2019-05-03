@@ -2,7 +2,7 @@
 Contributors: givewp
 Tags: donations, donation, ecommerce, e-commerce, fundraising, fundraiser, iats, gateway
 Requires at least: 4.8
-Tested up to: 4.9
+Tested up to: 5.2
 Stable tag: 1.0.4
 Requires Give: 2.3.0
 License: GPLv3
