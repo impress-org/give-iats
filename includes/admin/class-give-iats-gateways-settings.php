@@ -54,7 +54,7 @@ class Give_iATS_Gateway_Settings {
 		add_filter( 'give_payment_gateways', array( $this, 'add_gateways' ) );
 
 		// Add settings.
-		add_filter( 'give_settings_gateways', array( $this, 'add_settings' ), 99999 );
+		add_filter( 'give_get_settings_gateways', array( $this, 'add_settings' ), 99999 );
 		add_filter( 'give_get_sections_gateways', array( $this, 'add_section' ), 99999 );
 
 		// Add setting to donation edit screen.
