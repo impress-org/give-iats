@@ -98,12 +98,16 @@ class Give_iATS_Gateway_Settings {
 	 * @return array
 	 */
 	public function add_settings( $settings ) {
-		$iats_settings = array(
+		// Exit.
+		if( give_get_current_setting_section() !== "{$this->section_id}-payments" ) {
+			return $settings;
+		}
+
+		return array(
 			array(
 				'name' => __( 'iATS Payments', 'give-iats' ),
-				'desc' => '<hr>',
 				'id'   => 'give_iats_title',
-				'type' => 'give_title',
+				'type' => 'title',
 			),
 			array(
 				'name'    => __( 'Payment Method Label', 'give-iats' ),
@@ -147,9 +151,11 @@ class Give_iATS_Gateway_Settings {
 				'default'     => 'disabled',
 				'description' => __( 'This option will enable the billing details section for iATS which requires the donor\'s address to complete the donation. These fields are not required by iATS to process the transaction, but you may have the need to collect the data.', 'give-iats' ),
 			),
+			array(
+				'id'   => 'give_iats_title',
+				'type' => 'sectionend',
+			)
 		);
-
-		return array_merge( $settings, $iats_settings );
 	}
 
 	/**
