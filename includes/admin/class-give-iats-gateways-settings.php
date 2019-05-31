@@ -105,7 +105,6 @@ class Give_iATS_Gateway_Settings {
 
 		return array(
 			array(
-				'name' => __( 'iATS Payments', 'give-iats' ),
 				'id'   => 'give_iats_title',
 				'type' => 'title',
 			),
