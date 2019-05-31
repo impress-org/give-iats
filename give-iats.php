@@ -5,7 +5,7 @@
  * Description: Process online donations via the iATS payment gateway.
  * Author: GiveWP
  * Author URI: https://givewp.com
- * Version: 1.0.4
+ * Version: 1.0.5
  * Text Domain: give-iats
  * Domain Path: /languages
  * GitHub Plugin URI: https://github.com/impress-org/give-iats
@@ -13,7 +13,7 @@
 
 // iATS Constants.
 if ( ! defined( 'GIVE_IATS_VERSION' ) ) {
-	define( 'GIVE_IATS_VERSION', '1.0.4' );
+	define( 'GIVE_IATS_VERSION', '1.0.5' );
 }
 if ( ! defined( 'GIVE_IATS_MIN_GIVE_VERSION' ) ) {
 	define( 'GIVE_IATS_MIN_GIVE_VERSION', '2.3.0' );
