@@ -55,6 +55,7 @@ class Give_iATS_Gateway_Settings {
 
 		// Add settings.
 		add_filter( 'give_settings_gateways', array( $this, 'add_settings' ), 99999 );
+		add_filter( 'give_get_sections_gateways', array( $this, 'add_section' ), 99999 );
 
 		// Add setting to donation edit screen.
 		add_action( 'give_view_donation_details_before', array( $this, 'give_iats_admin_payment_js' ), 100 );
@@ -84,7 +85,7 @@ class Give_iATS_Gateway_Settings {
 	 * @return array
 	 */
 	public function add_section( $sections ) {
-		$sections[ $this->section_id ] = $this->section_label;
+		$sections[ "{$this->section_id}-payments" ] = $this->section_label;
 
 		return $sections;
 	}
