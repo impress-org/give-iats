@@ -74,7 +74,7 @@ function give_iats_get_server_name() {
 function give_iats_get_payment_method_label() {
 	$give_settings = give_get_settings();
 
-	return ( empty( $give_settings['iats_payment_method_label'] ) ? __( 'Credit Card', 'give-iats' ) : $give_settings['iats_payment_method_label'] );
+	return ( empty( $give_settings['gateways_label']['iats'] ) ? __( 'Credit Card', 'give-iats' ) : $give_settings['gateways_label']['iats'] );
 }
 
 
