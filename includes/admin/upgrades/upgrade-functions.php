@@ -63,5 +63,10 @@ function give_iats_v105_upgrades() {
 	$gateways_label['iats'] = $legacy_gateway_label;
 
 	// Update the new meta key which handle the payment method labels.
-	give_update_option( 'gateways_label', $gateways_label );
+	$is_updated = give_update_option( 'gateways_label', $gateways_label );
+
+	// Delete legacy option, if upgrade run successfully.
+	if ( $is_updated ) {
+		give_delete_option( 'iats_payment_method_label' );
+	}
 }
