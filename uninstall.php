@@ -10,7 +10,6 @@ $give_settings = give_get_settings();
 
 // Remove plugin settings.
 unset( $give_settings['iats_sandbox_testing'] );
-unset( $give_settings['iats_payment_method_label'] );
 unset( $give_settings['iats_sandbox_agent_code'] );
 unset( $give_settings['iats_sandbox_agent_password'] );
 unset( $give_settings['iats_live_agent_code'] );
