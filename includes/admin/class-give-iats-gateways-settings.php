@@ -109,13 +109,6 @@ class Give_iATS_Gateway_Settings {
 				'type' => 'title',
 			),
 			array(
-				'name'    => __( 'Payment Method Label', 'give-iats' ),
-				'id'      => 'iats_payment_method_label',
-				'type'    => 'text',
-				'default' => __( 'Credit Card', 'give-iats' ),
-				'desc'    => __( 'Payment method label will appear on the frontend.', 'give-iats' ),
-			),
-			array(
 				'name' => __( 'Live Agent Code', 'give-iats' ),
 				'id'   => 'iats_live_agent_code',
 				'type' => 'text',
