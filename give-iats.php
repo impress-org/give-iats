@@ -116,6 +116,8 @@ final class Give_iATS_Gateway {
 			require_once GIVE_IATS_PLUGIN_DIR . '/includes/admin/admin-actions.php';
 		}
 
+		require_once GIVE_IATS_PLUGIN_DIR . '/includes/admin/upgrades/upgrade-functions.php';
+
 		// iATS payment gateways core.
 		require_once GIVE_IATS_PLUGIN_DIR . '/includes/lib/iATSPayments/iATS.php';
 
