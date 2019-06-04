@@ -1,4 +1,4 @@
-# Copyright (C) 2018 Give-iATS
+# Copyright (C) 2019 Give-iATS
 # This file is distributed under the same license as the Give-iATS package.
 msgid ""
 msgstr ""
@@ -7,7 +7,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2018-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2019-MO-DA HO:MI+ZONE\n"
 "Language-Team: GiveWP <info@givewp.com>\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-SourceCharset: UTF-8\n"
@@ -16,15 +16,15 @@ msgstr ""
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: give-iats.php:232
+#: give-iats.php:234
 msgid "<strong>Activation Error:</strong> You must have the <a href=\"%s\" target=\"_blank\">Give</a> plugin installed and activated for Give - iATS to activate."
 msgstr ""
 
-#: give-iats.php:259
+#: give-iats.php:261
 msgid "<strong>Activation Error:</strong> You must have the <a href=\"%s\" target=\"_blank\">Give</a> core version %s for the Give - iATS add-on to activate."
 msgstr ""
 
-#: give-iats.php:348
+#: give-iats.php:350
 msgid "iATS Gateway"
 msgstr ""
 
@@ -36,63 +36,51 @@ msgstr ""
 msgid "iATS payment gateway disabled automatically because agent credentials is not correct."
 msgstr ""
 
-#: includes/admin/class-give-iats-gateways-settings.php:51, includes/admin/class-give-iats-gateways-settings.php:102
+#: includes/admin/class-give-iats-gateways-settings.php:51
 msgid "iATS Payments"
 msgstr ""
 
-#: includes/admin/class-give-iats-gateways-settings.php:108
-msgid "Payment Method Label"
-msgstr ""
-
-#: includes/admin/class-give-iats-gateways-settings.php:111, includes/functions.php:77
-msgid "Credit Card"
-msgstr ""
-
 #: includes/admin/class-give-iats-gateways-settings.php:112
-msgid "Payment method label will appear on the frontend."
-msgstr ""
-
-#: includes/admin/class-give-iats-gateways-settings.php:115
 msgid "Live Agent Code"
 msgstr ""
 
-#: includes/admin/class-give-iats-gateways-settings.php:118, includes/admin/class-give-iats-gateways-settings.php:130
+#: includes/admin/class-give-iats-gateways-settings.php:115, includes/admin/class-give-iats-gateways-settings.php:127
 msgid "Required agent code provided by iATS."
 msgstr ""
 
-#: includes/admin/class-give-iats-gateways-settings.php:121
+#: includes/admin/class-give-iats-gateways-settings.php:118
 msgid "Live Agent Password"
 msgstr ""
 
-#: includes/admin/class-give-iats-gateways-settings.php:124, includes/admin/class-give-iats-gateways-settings.php:136
+#: includes/admin/class-give-iats-gateways-settings.php:121, includes/admin/class-give-iats-gateways-settings.php:133
 msgid "Required password provided by iATS."
 msgstr ""
 
-#: includes/admin/class-give-iats-gateways-settings.php:127
+#: includes/admin/class-give-iats-gateways-settings.php:124
 msgid "Sandbox Agent Code"
 msgstr ""
 
-#: includes/admin/class-give-iats-gateways-settings.php:133
+#: includes/admin/class-give-iats-gateways-settings.php:130
 msgid "Sandbox Agent Password"
 msgstr ""
 
-#: includes/admin/class-give-iats-gateways-settings.php:139
+#: includes/admin/class-give-iats-gateways-settings.php:136
 msgid "Collect Billing Details"
 msgstr ""
 
-#: includes/admin/class-give-iats-gateways-settings.php:143
+#: includes/admin/class-give-iats-gateways-settings.php:140
 msgid "Enabled"
 msgstr ""
 
-#: includes/admin/class-give-iats-gateways-settings.php:144
+#: includes/admin/class-give-iats-gateways-settings.php:141
 msgid "Disabled"
 msgstr ""
 
-#: includes/admin/class-give-iats-gateways-settings.php:147
+#: includes/admin/class-give-iats-gateways-settings.php:144
 msgid "This option will enable the billing details section for iATS which requires the donor's address to complete the donation. These fields are not required by iATS to process the transaction, but you may have the need to collect the data."
 msgstr ""
 
-#: includes/admin/class-give-iats-gateways-settings.php:172
+#: includes/admin/class-give-iats-gateways-settings.php:171
 msgid "Refund Charge in iATS?"
 msgstr ""
 
@@ -106,6 +94,10 @@ msgstr ""
 
 #: includes/admin/plugins-list.php:81
 msgid "Add-ons"
+msgstr ""
+
+#: includes/admin/upgrades/upgrade-functions.php:59, includes/functions.php:77
+msgid "Credit Card"
 msgstr ""
 
 #: includes/class-give-iats-notices.php:28

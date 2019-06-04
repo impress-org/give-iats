@@ -16,7 +16,7 @@ if ( ! defined( 'GIVE_IATS_VERSION' ) ) {
 	define( 'GIVE_IATS_VERSION', '1.0.5' );
 }
 if ( ! defined( 'GIVE_IATS_MIN_GIVE_VERSION' ) ) {
-	define( 'GIVE_IATS_MIN_GIVE_VERSION', '2.3.0' );
+	define( 'GIVE_IATS_MIN_GIVE_VERSION', '2.4.0' );
 }
 if ( ! defined( 'GIVE_IATS_PLUGIN_FILE' ) ) {
 	define( 'GIVE_IATS_PLUGIN_FILE', __FILE__ );

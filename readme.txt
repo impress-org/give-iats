@@ -4,7 +4,7 @@ Tags: donations, donation, ecommerce, e-commerce, fundraising, fundraiser, iats,
 Requires at least: 4.8
 Tested up to: 5.2
 Stable tag: 1.0.5
-Requires Give: 2.3.0
+Requires Give: 2.4.0
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -38,6 +38,10 @@ The manual installation method involves downloading our donation plugin and uplo
 Automatic updates should work like a charm; as always though, ensure you backup your site just in case.
 
 == Changelog ==
+
+= 1.0.5: June 3rd, 2019 =
+* Tweak: Adjusted the plugin's settings screens code logic to work with GiveWP Core 2.5.0+ which deprecates the old methods used to register settings in previous versions of this add-on.
+* Tweak: Removed the outdated option to set a gateway label which is now part of GiveWP Core.
 
 = 1.0.4: November 13th, 2018 =
 * Tweak: Optimized how the plugin is activated to depend on Give Core and prevent potential activation issues when requirements not met.
