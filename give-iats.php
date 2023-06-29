@@ -97,8 +97,9 @@ final class Give_iATS_Gateway {
 	/**
 	 * Load files.
 	 *
-	 * @since  1.0
-	 * @access public
+	 * @unreleased Load credit card validation library from composer.
+	 * @since      1.0
+	 * @access     public
 	 * @return Give_iATS_Gateway
 	 */
 	public function init() {
