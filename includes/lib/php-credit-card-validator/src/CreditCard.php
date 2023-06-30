@@ -7,7 +7,6 @@
  *
  * This file sync upto version 1.0.2
  * @see https://packagist.org/packages/inacho/php-credit-card-validator#1.0.2
- *
  */
 
 /**

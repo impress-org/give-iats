@@ -334,7 +334,8 @@ final class Give_iATS_Gateway {
 	function activation_banner() {
 
 		// Check for activation banner inclusion.
-		if ( ! class_exists( 'Give_Addon_Activation_Banner' )
+		if (
+			! class_exists( 'Give_Addon_Activation_Banner' )
 			&& file_exists( GIVE_PLUGIN_DIR . 'includes/admin/class-addon-activation-banner.php' )
 		) {
 
