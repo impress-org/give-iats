@@ -117,13 +117,13 @@ final class Give_iATS_Gateway {
 			require_once GIVE_IATS_PLUGIN_DIR . '/includes/admin/admin-actions.php';
 		}
 
-		// Load composer packages.
-		require_once "vendor/autoload.php";
-
 		require_once GIVE_IATS_PLUGIN_DIR . '/includes/admin/upgrades/upgrade-functions.php';
 
 		// iATS payment gateways core.
 		require_once GIVE_IATS_PLUGIN_DIR . '/includes/lib/iATSPayments/iATS.php';
+
+		// Credit card validator core.
+		require_once GIVE_IATS_PLUGIN_DIR . '/includes/lib/php-credit-card-validator/src/CreditCard.php';
 
 		// Load helper functions.
 		require_once GIVE_IATS_PLUGIN_DIR . '/includes/functions.php';
