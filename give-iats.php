@@ -97,9 +97,8 @@ final class Give_iATS_Gateway {
 	/**
 	 * Load files.
 	 *
-	 * @unreleased Load credit card validation library from composer.
-	 * @since      1.0
-	 * @access     public
+	 * @since  1.0
+	 * @access public
 	 * @return Give_iATS_Gateway
 	 */
 	public function init() {
@@ -336,7 +335,7 @@ final class Give_iATS_Gateway {
 
 		// Check for activation banner inclusion.
 		if ( ! class_exists( 'Give_Addon_Activation_Banner' )
-		     && file_exists( GIVE_PLUGIN_DIR . 'includes/admin/class-addon-activation-banner.php' )
+			&& file_exists( GIVE_PLUGIN_DIR . 'includes/admin/class-addon-activation-banner.php' )
 		) {
 
 			include GIVE_PLUGIN_DIR . 'includes/admin/class-addon-activation-banner.php';
