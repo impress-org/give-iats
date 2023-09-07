@@ -1,0 +1,9 @@
+{
+    "name": "impress-org/give-iats",
+    "type": "wordpress-plugin",
+    "homepage": "https://givewp.com/",
+    "support": {
+        "issues": "https://github.com/impress-org/give-iats/issues"
+    },
+    "require": {}
+}

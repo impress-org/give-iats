@@ -1,5 +1,5 @@
 {
-  "name": "give-payumoney",
+  "name": "give-iats",
   "private": true,
   "devDependencies": {
     "gulp": "^3.9.1",
