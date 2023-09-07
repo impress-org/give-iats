@@ -2,7 +2,7 @@
   "name": "give-iats",
   "private": true,
   "devDependencies": {
-    "gulp": "^3.9.1",
+    "gulp": "^4.0.2",
     "fs-extra": "^1.0.0",
     "gulp-sort": "^2.0.0",
     "gulp-wp-pot": "^1.2.2",
