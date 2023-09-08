@@ -10,3 +10,5 @@ jobs:
         with:
             plugin_slug: give-iats
             zip_name: give-iats
+            install_composer_packages: false
+            install_npm_packages: false
