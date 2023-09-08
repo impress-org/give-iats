@@ -1,7 +1,4 @@
 {
   "name": "give-iats",
-  "private": true,
-  "scripts": {
-    "build": ""
-  }
+  "private": true
 }
