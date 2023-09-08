@@ -15,3 +15,5 @@ jobs:
         with:
             ref: ${{ github.event.inputs.ref }}
             plugin_slug: give-iats
+            install_composer_packages: false
+            install_npm_packages: false
