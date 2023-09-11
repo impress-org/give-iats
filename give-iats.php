@@ -139,40 +139,6 @@ final class Give_iATS_Gateway {
 		return self::$instance;
 	}
 
-
-	/**
-	 * Setup hooks. CURRENTLY UNUSED.
-	 *
-	 * @since  1.0
-	 * @access public
-	 * @return Give_iATS_Gateway
-	 */
-	function setup_hooks() {
-
-		// Admin only scripts.
-		if ( ! is_admin() ) {
-			return self::$instance;
-		}
-		// Load scripts and style.
-		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
-
-		return self::$instance;
-	}
-
-	/**
-	 * Enqueue scripts.
-	 *
-	 * @since  1.0
-	 * @access public
-	 *
-	 * @param $hook
-	 */
-	public function enqueue_scripts( $hook ) {
-		if ( isset( $_GET['tab'] ) && 'gateways' === $_GET['tab'] ) {
-			wp_enqueue_script( 'iats-admin-settings', plugins_url( '/assets/js/admin/admin-settings.js', GIVE_IATS_PLUGIN_FILE ), array( 'jquery' ) );
-		}
-	}
-
 	/**
 	 * Load the text domain.
 	 *
